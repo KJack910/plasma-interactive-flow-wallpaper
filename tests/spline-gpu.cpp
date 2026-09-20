@@ -12,7 +12,7 @@
 int main(int argc, char **argv) {
  QGuiApplication app(argc,argv);
  QSurfaceFormat fmt; fmt.setVersion(3,3); fmt.setProfile(QSurfaceFormat::CoreProfile);
- QOpenGLContext ctx; ctx.setFormat(fmt); if(!ctx.create()){ puts("ctx fail"); return 2; }
+ QOpenGLContext ctx; ctx.setFormat(fmt); if(!ctx.create()){ puts("SKIP: OpenGL 3.3 context unavailable"); return 77; }
  QOffscreenSurface surf; surf.setFormat(ctx.format()); surf.create(); if(!ctx.makeCurrent(&surf)){ puts("current fail"); return 2; }
  QOpenGLFunctions_3_3_Core gl; gl.initializeOpenGLFunctions();
  printf("GL: %s\n",gl.glGetString(GL_RENDERER));

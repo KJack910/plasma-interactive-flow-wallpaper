@@ -7,8 +7,9 @@ The CTest suite covers:
 - zoom limits;
 - mesh visibility;
 - mesh geometry and deduplication;
-- CPU/GPU spline equivalence;
-- the GPU spline path;
+- CPU/GPU spline equivalence when an OpenGL 3.3 context is available;
+- the GPU spline path (marked skipped by CTest when the headless environment
+  cannot create an OpenGL 3.3 context);
 - output visibility and pause behavior.
 
 Run:
@@ -40,7 +41,8 @@ bash -n install.sh uninstall.sh scripts/*.sh
 A release is ready only when:
 
 - CMake configuration succeeds;
-- all CTest cases pass;
+- all CTest cases pass or are explicitly skipped when the host lacks the
+  required OpenGL context;
 - `qmllint` reports no errors;
 - all Bash scripts pass `bash -n`;
 - Plasma recognizes and installs the package;
