@@ -59,6 +59,7 @@ target_link_libraries(xmb_splinegpu_test PRIVATE
 )
 target_include_directories(xmb_splinegpu_test PRIVATE "${CMAKE_SOURCE_DIR}/src")
 add_test(NAME xmb_splinegpu COMMAND xmb_splinegpu_test)
+set_tests_properties(xmb_splinegpu PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
 
 add_executable(xmb_outputvisibility_test
     tests/output-visibility.cpp
