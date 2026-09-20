@@ -1,0 +1,19 @@
+{
+  "KPackageStructure": "Plasma/Wallpaper",
+  "KPlugin": {
+    "Id": "org.xmbflow.interactive",
+    "Name": "XMB Interactive Flow",
+    "Description": "Native interactive PS3 XMB-inspired wave and particle wallpaper for Plasma 6.",
+    "Icon": "preferences-desktop-wallpaper",
+    "Version": "1.1.0",
+    "License": "MIT",
+    "Website": "https://github.com/linkev/PlayStation-3-XMB",
+    "Authors": [
+      {
+        "Name": "XMB Flow project"
+      }
+    ]
+  },
+  "X-KDE-ParentApp": "org.kde.plasmashell",
+  "X-Plasma-API-Minimum-Version": "6.0"
+}

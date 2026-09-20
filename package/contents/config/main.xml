@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="General">
+    <entry name="quality" type="Int">
+      <label>Mesh quality: 0 low, 1 medium, 2 high, 3 ultra, 4 extreme, 5 extreme plus.</label>
+      <default>3</default>
+    </entry>
+    <entry name="targetFps" type="Int">
+      <label>Target rendering frame rate.</label>
+      <default>120</default>
+    </entry>
+    <entry name="particleCount" type="Int">
+      <label>Number of background particles.</label>
+      <default>12000</default>
+    </entry>
+    <entry name="waveSpeed" type="Double">
+      <label>Wave animation speed multiplier.</label>
+      <default>1.0</default>
+    </entry>
+    <entry name="particleSpeed" type="Double">
+      <label>Particle animation speed multiplier.</label>
+      <default>1.0</default>
+    </entry>
+    <entry name="mouseStrength" type="Double">
+      <label>Mouse interaction strength multiplier.</label>
+      <default>1.0</default>
+    </entry>
+    <entry name="interactionRadius" type="Double">
+      <label>Mouse interaction radius multiplier.</label>
+      <default>1.0</default>
+    </entry>
+    <entry name="brightness" type="Double">
+      <label>Background gradient brightness.</label>
+      <default>1.0</default>
+    </entry>
+    <entry name="zoom" type="Double">
+      <label>Base zoom multiplier.</label>
+      <default>1.0</default>
+    </entry>
+    <entry name="zoomSensitivity" type="Double">
+      <label>Mouse wheel zoom sensitivity.</label>
+      <default>0.60</default>
+    </entry>
+    <entry name="flowGroupOffset" type="Double">
+      <label>Vertical separation between upper, center and lower flow groups.</label>
+      <default>1.28</default>
+    </entry>
+    <entry name="flowSpacing" type="Double">
+      <label>Uniform separation between flows inside each group.</label>
+      <default>0.68</default>
+    </entry>
+    <entry name="upperFlowCount" type="Int">
+      <label>Number of visible upper flow bands.</label>
+      <default>1</default>
+    </entry>
+    <entry name="centerFlowCount" type="Int">
+      <label>Number of visible center flow bands.</label>
+      <default>0</default>
+    </entry>
+    <entry name="lowerFlowCount" type="Int">
+      <label>Number of visible lower flow bands.</label>
+      <default>1</default>
+    </entry>
+    <entry name="linkAcrossScreens" type="Bool">
+      <label>Render flows and particles as one surface spanning the virtual desktop.</label>
+      <default>false</default>
+    </entry>
+    <entry name="horizontalOverscan" type="Bool">
+      <label>Extend waves and particles beyond the horizontal desktop edges.</label>
+      <default>true</default>
+    </entry>
+    <entry name="multiscreenDebug" type="Bool">
+      <label>Show the global 2D diagnostic grid and isolate multiscreen geometry.</label>
+      <default>false</default>
+    </entry>
+    <entry name="interactionEnabled" type="Bool">
+      <label>Enable pointer interaction.</label>
+      <default>true</default>
+    </entry>
+    <entry name="pointerFollowMode" type="Int">
+      <label>Pointer following: 0 off, 1 interaction, 2 whole flow and interaction.</label>
+      <default>1</default>
+    </entry>
+    <entry name="interactionDirection" type="Int">
+      <label>Interaction direction: 0 ++, 1 -+, 2 +-, 3 --.</label>
+      <default>0</default>
+    </entry>
+    <entry name="splineBackend" type="Int">
+      <label>Spline calculation: 0 CPU, 1 GPU with CPU fallback.</label>
+      <default>1</default>
+    </entry>
+    <entry name="renderStyle" type="Int">
+      <label>Rendering structure: original or altered.</label>
+      <default>0</default>
+    </entry>
+    <entry name="particleStyle" type="Int">
+      <label>Particle size profile: small, large or mixed.</label>
+      <default>0</default>
+    </entry>
+    <entry name="particleSimulation" type="Int">
+      <label>Particle simulation: pseudo-2D or volumetric 3D.</label>
+      <default>0</default>
+    </entry>
+    <entry name="pauseWhenHidden" type="Bool">
+      <label>Pause rendering when the wallpaper item is hidden.</label>
+      <default>true</default>
+    </entry>
+    <entry name="pauseWhenCovered" type="Bool">
+      <label>Pause each output while its desktop is fully covered by applications.</label>
+      <default>true</default>
+    </entry>
+    <entry name="renderingPaused" type="Bool">
+      <label>Manually pause this wallpaper output until resumed.</label>
+      <default>false</default>
+    </entry>
+  </group>
+</kcfg>

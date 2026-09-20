@@ -1,0 +1,11 @@
+{
+    "KPackageStructure": "KWin/Script",
+    "KPlugin": {
+        "Id": "xmbfullscreenbridge",
+        "Name": "XMB Fullscreen Wallpaper Bridge",
+        "Description": "Freezes the XMB wallpaper only on outputs covered by fullscreen windows.",
+        "Version": "1.1.0",
+        "License": "MIT"
+    },
+    "X-Plasma-API": "javascript"
+}

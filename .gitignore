@@ -1,0 +1,44 @@
+# Build outputs
+/build/
+/build-test/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+install_manifest.txt
+.ninja_deps
+.ninja_log
+.ninja*
+compile_commands.json
+
+# Generated native plugin
+package/contents/ui/xmbnative/*.so
+*.o
+*.obj
+*.a
+*.la
+*.d
+
+# IDE and tooling state
+.cache/
+.clangd/
+.vscode/
+.idea/
+*.user
+
+# Runtime/debug artifacts
+core
+core.*
+*.core
+*.log
+
+# Local archives and backups
+backups/
+*.tar
+*.tar.gz
+*.bak
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*~
