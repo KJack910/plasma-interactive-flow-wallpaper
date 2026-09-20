@@ -25,6 +25,7 @@ package/contents/ui/xmbnative/*.so
 .vscode/
 .idea/
 *.user
+compile_commands.json
 
 # Runtime/debug artifacts
 core

@@ -1,0 +1,25 @@
+name: build-and-test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  arch-linux:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Install dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm --needed git cmake ninja qt6-base qt6-declarative qt6-tools
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --parallel 2
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+      - name: QML lint
+        run: qmllint package/contents/ui/main.qml package/contents/ui/config.qml

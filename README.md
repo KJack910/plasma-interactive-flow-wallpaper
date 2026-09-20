@@ -4,6 +4,14 @@ Versione nativa del background XMB basata sulla v24 del progetto web. Non usa
 Qt WebEngine, Chromium o HTML: wave e particelle vengono renderizzate da un
 `QQuickFramebufferObject` C++ con OpenGL dentro `plasmashell`.
 
+Documentazione:
+
+- [Specifiche](docs/SPECIFICATION.md)
+- [Installazione](docs/INSTALLATION.md)
+- [Audit di portabilità](docs/PORTABILITY.md)
+- [Verifica e test](docs/TESTING.md)
+- [Contribuzione](CONTRIBUTING.md)
+
 La valutazione misurata di prestazioni, consumo e fattibilità Vulkan è in
 [PERFORMANCE.md](PERFORMANCE.md).
 

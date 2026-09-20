@@ -13,7 +13,8 @@ fi
 for cmd in cmake ninja kpackagetool6; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
     echo "Errore: comando '$cmd' non trovato." >&2
-    echo "Su CachyOS esegui: $0 --deps" >&2
+    echo "Installa manualmente CMake, Ninja, Qt 6 e gli strumenti KDE Plasma 6;" >&2
+    echo "su Arch/CachyOS puoi eseguire: $0 --deps" >&2
     exit 1
   fi
 done
