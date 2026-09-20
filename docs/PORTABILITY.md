@@ -7,7 +7,7 @@ Audit date: September 20, 2026.
 The system is general within this target boundary:
 
 ```text
-Linux + KDE Plasma 6 + Qt 6.6+ + OpenGL 3.3+ + user Plasma session
+Linux + KDE Plasma 6 + Qt 6.4+ build / Qt 6.6+ verified runtime + OpenGL 3.3+ + user Plasma session
 ```
 
 It is not a cross-platform Windows/macOS wallpaper. The C++ renderer uses Qt,
@@ -18,7 +18,7 @@ interfaces.
 
 | Area | Status | Verified boundary |
 |---|---|---|
-| C++ build | General on Linux with Qt 6 | CMake 3.22+, Ninja, C++20 |
+| C++ build | General on Linux with Qt 6 | CMake 3.22+, Qt 6.4+, Ninja, C++20 |
 | Rendering | GPU-dependent | OpenGL 3.3+ |
 | Plasma package | KDE-specific | Plasma 6, `kpackagetool6` |
 | Session | Desktop-specific | KDE Plasma, Wayland verified |

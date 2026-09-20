@@ -9,7 +9,8 @@ Supported environment:
 - CMake 3.22+;
 - Ninja;
 - a C++20 compiler;
-- Qt 6.6+ with Core, Gui, Quick, Qml, OpenGL and DBus;
+- Qt 6.4+ with Core, Gui, Quick, Qml, OpenGL and DBus for building;
+- Qt 6.6+ is the verified runtime baseline;
 - `kpackagetool6`, `kwriteconfig6`, `qdbus6` and `plasmashell`;
 - OpenGL 3.3+ for the renderer.
 

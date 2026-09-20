@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-find_package(Qt6 6.6 REQUIRED COMPONENTS Core Gui Quick Qml OpenGL DBus)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Core Gui Quick Qml OpenGL DBus)
 
 set(PACKAGE_DIR "${CMAKE_SOURCE_DIR}/package")
 set(PLUGIN_DIR "${PACKAGE_DIR}/contents/ui/xmbnative")

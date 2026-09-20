@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Linux with Qt 6.6+ and OpenGL 3.3.
+- Linux with Qt 6.4+ for building and Qt 6.6+ for the verified runtime;
 - CMake 3.22+.
 - Ninja.
 - Qt 6 modules: Core, Gui, Quick, Qml, OpenGL and DBus.

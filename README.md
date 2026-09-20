@@ -29,7 +29,8 @@ Windows/macOS wallpaper and it does not currently target Plasma 5.
 
 - Linux with KDE Plasma 6.
 - Wayland is the verified session type; X11 is not the primary target.
-- Qt 6.6 or newer: Core, Gui, Quick, Qml, OpenGL and DBus.
+- Qt 6.4 or newer for building: Core, Gui, Quick, Qml, OpenGL and DBus.
+- Qt 6.6 or newer is the verified runtime baseline.
 - CMake 3.22 or newer.
 - Ninja and a C++20 compiler.
 - OpenGL 3.3 or newer.

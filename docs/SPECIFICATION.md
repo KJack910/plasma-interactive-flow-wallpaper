@@ -35,7 +35,8 @@ and must provide a dedicated removal path.
 
 - C++20.
 - CMake 3.22 or newer.
-- Qt 6.6 or newer: Core, Gui, Quick, Qml, OpenGL and DBus.
+- Qt 6.4 or newer for building: Core, Gui, Quick, Qml, OpenGL and DBus.
+- Qt 6.6 or newer is the verified runtime baseline.
 - Out-of-source build, preferably with Ninja.
 - Tests runnable through CTest.
 - No dependency on Qt WebEngine, Chromium or HTML.
