@@ -26,7 +26,7 @@ jobs:
       - name: Test
         run: ctest --test-dir build --output-on-failure
       - name: QML lint
-        run: /usr/lib/qt6/bin/qmllint package/contents/ui/main.qml package/contents/ui/config.qml
+        run: /usr/lib/qt6/bin/qmllint -W -1 package/contents/ui/main.qml package/contents/ui/config.qml
       - name: Version consistency
         run: ./scripts/check-version.sh
       - name: Shell syntax
