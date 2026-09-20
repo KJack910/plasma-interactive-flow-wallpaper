@@ -1,123 +1,106 @@
-# Valutazione OpenGL/Vulkan — 16 settembre 2026
+# OpenGL/Vulkan performance assessment — September 16, 2026
 
-## Sistema e carico misurato
+## System and measured load
 
-- Plasma su due monitor, superficie virtuale 4480×1080; Qt 6.11.2.
-- AMD Radeon RX 5700 XT, `amdgpu`/RADV (Mesa 26.2.2); Vulkan 1.4 disponibile.
-- Preset realmente configurato su entrambi i monitor: qualità 4, 9 flussi
-  (3+3+3), 30.000 particelle 3D, 60 FPS, superficie globale collegata.
-- Campionamento di 6 secondi per fase, in sequenza attivo → pausa completa →
-  attivo. Pausa applicata temporaneamente a entrambi gli output tramite il
-  bridge D-Bus del wallpaper; in seguito lo script KWin è stato ricaricato per
-  ristabilire lo stato di copertura reale. Nessuna impostazione utente modificata.
+- Plasma on two monitors, 4480×1080 virtual surface; Qt 6.11.2.
+- AMD Radeon RX 5700 XT, `amdgpu`/RADV (Mesa 26.2.2); Vulkan 1.4 available.
+- Preset measured on both monitors: quality 4, 9 flows (3+3+3), 30,000 3D
+  particles, 60 FPS and linked global surface.
+- Six-second samples were taken in active → fully paused → active order. Pause
+  was temporarily applied to both outputs through the wallpaper's D-Bus bridge;
+  the KWin script was then reloaded to restore the actual coverage state. No
+  user setting was changed.
 
-| Fase | Motore grafico di plasmashell | CPU di plasmashell | GPU totale | Potenza RX 5700 XT |
+| Phase | plasmashell graphics engine | plasmashell CPU | Total GPU | RX 5700 XT power |
 |---|---:|---:|---:|---:|
-| Attivo A | 232 ms/s | 0,59 core | 34,1% | 41,7 W |
-| Pausa | 0,006 ms/s | ~0 core | 5,7% | 33,9 W |
-| Attivo B | 212 ms/s | 0,63 core | 26,6% | 41,3 W |
+| Active A | 232 ms/s | 0.59 core | 34.1% | 41.7 W |
+| Paused | 0.006 ms/s | ~0 core | 5.7% | 33.9 W |
+| Active B | 212 ms/s | 0.63 core | 26.6% | 41.3 W |
 
-Il contatore `drm-engine-gfx` proviene dal file `fdinfo` DRM del processo
-`plasmashell` (i suoi descrittori condividono lo stesso client ID, quindi non
-sono sommati). CPU: differenza dei tick `utime+stime` divisa per `CLK_TCK=100`.
-Occupazione GPU e potenza: medie di sette campioni a un secondo dai contatori
-`amdgpu`. Il confronto attivo/pausa attribuisce la maggior parte della
-differenza al wallpaper, ma `plasmashell` include anche pannelli e altre UI;
-occupazione e potenza sono valori dell'intera GPU, non del solo XMB. La prova
-è breve e non misura temperatura stabilizzata o energia su molte ore.
+The `drm-engine-gfx` counter comes from the DRM `fdinfo` file for the
+`plasmashell` process. Its descriptors share the same client ID and must not be
+summed. CPU is calculated from `utime+stime` deltas divided by `CLK_TCK=100`.
+GPU utilization and power are seven one-second averages from `amdgpu` counters.
+The active/paused comparison attributes most of the difference to the
+wallpaper, but `plasmashell` also includes panels and other UI. GPU utilization
+and power are whole-GPU values, not XMB-only values. The sample is short and
+does not measure stabilized temperature or energy over many hours.
 
-## Carico derivato dal codice
+## Work derived from the code
 
-Alla qualità 4, con la superficie attuale, la griglia ha 1494×256 campioni e
-762.448 indici per flusso intero. Senza il ritaglio per viewport, nove flussi
-disegnati da due istanze produrrebbero circa 13,7 milioni di riferimenti a
-vertici per frame, oppure 823 milioni/s a 60 FPS: è il limite di confronto,
-non il carico tipico dopo il ritaglio descritto sotto. Ogni istanza ricalcola
-inoltre una texture 1024×128 sulla CPU e la
-carica ogni frame: complessivamente 15,7 milioni di texel/s, pari a 60 MiB/s
-di soli dati float trasferiti. Sono stime di lavoro, non tempi misurati.
+At quality 4 and the current surface, the grid has 1494×256 samples and
+762,448 indices for a full flow. Without viewport clipping, nine flows drawn by
+two instances would produce about 13.7 million vertex references per frame, or
+823 million/s at 60 FPS. This is a comparison limit, not the typical clipped
+load. Each instance also recalculates a 1024×128 texture on the CPU and uploads
+it every frame: together, 15.7 million texels/s or 60 MiB/s of float data.
+These are work estimates, not measured frame times.
 
-## Decisione
+## Decision
 
-Non sostituire subito OpenGL con Vulkan. Il renderer usa
-`QQuickFramebufferObject`, che Qt supporta solo con OpenGL; il passaggio
-richiede un nuovo nodo scene graph/QRhi e shader convertiti. Inoltre il
-backend della scena Qt Quick è deciso da plasmashell, non dalla singola istanza
-del wallpaper. Il possibile risparmio di CPU da Vulkan non è quantificabile
-senza un prototipo con la stessa scena; i dati attuali non mostrano una GPU
-satura e indicano lavoro CPU procedurale e mesh ripetuta da affrontare prima.
+Do not replace OpenGL with Vulkan immediately. The renderer uses
+`QQuickFramebufferObject`, which Qt supports through OpenGL; the migration
+would require a new scene-graph node/QRhi path and converted shaders. The Qt
+Quick backend is selected by `plasmashell`, not by an individual wallpaper
+instance. The current data does not show a saturated GPU and points first to
+procedural CPU work and repeated mesh work.
 
-## Riduzione dell'overscan elaborato (stima da geometria)
+## Reduced overscan work — geometric estimate
 
-Il renderer conserva la sorgente larga quattro desktop virtuali per lo zoom
-minimo di 0,40× e la navigazione fino ai bordi, ma per ogni monitor invia alla
-GPU solo le colonne il cui intervallo prospettico può entrare nel viewport.
-La riserva aggiuntiva parte da 128 pixel a schermo e cresce con la forza della
-deformazione; non è più una frazione fissa dell'intero desktop. Gli estremi
-vengono arrotondati a blocchi di 16 colonne per evitare upload a ogni minimo
-movimento. La modalità che trasla tutta la scena col puntatore usa la stessa
-selezione, includendo la traslazione nota nel calcolo inverso. Le particelle
-e la texture spline non sono
-ancora ritagliate: il risparmio sottostante riguarda i vertici della mesh,
-non una riduzione già misurata di tempo GPU o watt.
+The renderer keeps a source four virtual desktops wide for the 0.40× minimum
+zoom and edge navigation, but each monitor sends only columns whose projected
+interval can enter its viewport. Additional margin starts at 128 screen pixels
+and grows with deformation strength; it is rounded to blocks of 16 columns to
+avoid uploads for every small movement. Pointer-follow mode uses the same
+selection and includes the known translation in the inverse calculation.
 
-Con 1494 colonne, due output 1920+2560 su 4480 pixel virtuali, camera
-centrata e interazione ordinaria, le colonne inviate per output sono circa
-529+673 a 0,40×, 225+289 a 1× e 81+97 a 3,50×, contro 1494+1494 senza
-ritaglio: rispettivamente 60%, 83% e 94% in meno. Sono conteggi geometrici,
-non tempi GPU; con interazione più forte la riserva cresce e il risparmio cala.
-Il solo intervallo matematicamente visibile è più stretto, ma non sarebbe una
-scelta sicura per prospettiva, deformazione e rasterizzazione. Le particelle
-non sono incluse in questi conteggi.
+Particles and the spline texture are not clipped yet: the current saving
+concerns mesh vertices only and is not a measured reduction in GPU time or
+power.
 
-Per ridurre altro carico senza abbassare il dettaglio visivo, il candidato
-principale è `generateSplineTexture()`: i due renderer collegati valutano gli
-stessi 131.072 texel per frame, inclusa una componente hash che non dipende
-dal tempo. Si può precomputare la componente statica una volta, poi calcolare
-la parte animata una sola volta per timestamp/superficie globale e farla usare
-a entrambi gli output. Questo dimezzerebbe il calcolo procedurale duplicato
-su due schermi, ma non gli upload finché ogni contesto mantiene una propria
-texture. Una texture GPU condivisa richiede prima di verificare la condivisione
-dei contesti OpenGL e la gestione della sua durata. Ridurre la risoluzione della
-spline o della mesh non è il primo passo: può alterare filamenti e movimento.
-Servono misure CPU e GPU a parità di configurazione prima/dopo, non dedurre i
-watt dai soli conteggi di vertici.
+With 1494 columns and two outputs of 1920+2560 over a 4480-pixel virtual width,
+centered camera and normal interaction, the approximate columns sent per output
+are 529+673 at 0.40×, 225+289 at 1× and 81+97 at 3.50×, compared with
+1494+1494 without clipping. These are geometric counts, not GPU timings, and
+particles are excluded.
 
-Ordine consigliato:
+## Next optimization order
 
-1. Misurare il risparmio reale della nuova selezione di colonne per viewport.
-2. Generare/condividere la texture spline una volta per frame globale oppure
-   spostarne il calcolo in GPU; misurare CPU, GPU e watt.
-3. Solo se resta un limite di driver/draw-call CPU, creare un prototipo QRhi
-   OpenGL/Vulkan con gli stessi shader, FPS e monitor. Confrontare tempi CPU
-   per frame, tempo GPU, FPS percentili e watt a parità di output visivo.
+1. Measure the actual saving from viewport-column selection.
+2. Generate/share the spline texture once per global frame or move its dynamic
+   calculation to the GPU; measure CPU, GPU and power.
+3. Only if driver or draw-call CPU remains a bottleneck, prototype a QRhi
+   OpenGL/Vulkan path with identical shaders, FPS and monitor layout. Compare
+   CPU frame time, GPU time, FPS percentiles and power at equal visual output.
 
-Riferimenti Qt: [QQuickFramebufferObject](https://doc.qt.io/qt-6/qquickframebufferobject.html),
-[QRhi](https://doc.qt.io/qt-6/qrhi.html),
-[selezione del backend Qt Quick](https://doc.qt.io/qt-6/qtquick-visualcanvas-scenegraph-renderer.html).
+Reducing spline or mesh resolution is not the first step because it may change
+filaments and motion.
 
-## Aggiornamento 17 settembre 2026 — preset Extreme+, spline e deduplicazione
+## September 17, 2026 — Extreme+ preset and deduplication
 
-Configurazione misurata: quality=5 (nuovo preset "Extreme+", griglia base
-440×320, resX estesa 2054), 30.000 particelle 3D, 9 flussi, 60 FPS, due
-output 1920+2560 su 4480×1080 collegati.
+Measured configuration: quality 5 (Extreme+, base grid 440×320, extended
+resX 2054), 30,000 3D particles, 9 flows, 60 FPS and two linked outputs of
+1920+2560 on a 4480×1080 virtual desktop.
 
-1. **Spline** (`src/splinetexture.h`): la componente hash statica della
-   texture 1024×128 è generata una sola volta per processo; ogni frame
-   calcola solo i termini dinamici. Equivalenza bit-level verificata su
-   8.519.680 texel (test `xmb_splineequivalence`); benchmark: **−35…−36%**
-   sul calcolo CPU della spline (≈3,0 ms → ≈1,95 ms per frame).
-2. **Deduplicazione mesh** (`src/meshgeometry.h`): ogni vertice della griglia
-   è memorizzato una sola volta; gli indici ricostruiscono gli stessi strip
-   e raccordi. Test `xmb_meshgeometry`: 20,9 milioni di coordinate
-   indicizzate identiche. VBO per output a Extreme+: **10.483.616 →
-   5.258.240 byte (−49,8%)**. Triangoli, ritaglio, prospettiva e zoom
-   invariati.
-3. **Misura post-installazione** (plasmashell riavviato, nuove librerie
-   caricate): engine GFX del processo `plasmashell` da `fdinfo` DRM
-   (un solo fd; i tre fd condividono lo stesso client-id e vanno contati
-   una volta): **12,3%** stabile su tre campioni da 6–10 s. Il 35–40%
-   citato in precedenza era GPU totale (incluse KWin e altre app), non
-   il solo engine gfx di plasmashell: i due numeri non sono confrontabili
-   direttamente. A parità di metrica (gfx% di plasmashell), la riduzione
-   di vertici e calcolo CPU è inclusa in questa cifra.
+1. **Spline** (`src/splinetexture.h`): the static hash component of the
+   1024×128 texture is generated once per process; each frame calculates only
+   dynamic terms. Bit-level equivalence was verified over 8,519,680 texels by
+   `xmb_splineequivalence`; the CPU calculation improved by approximately
+   35–36% (about 3.0 ms to 1.95 ms per frame).
+2. **Mesh deduplication** (`src/meshgeometry.h`): each grid vertex is stored
+   once and indices rebuild the same strips and joins. The
+   `xmb_meshgeometry` test verifies 20.9 million identical indexed coordinates.
+   Extreme+ VBO per output decreased from 10,483,616 to 5,258,240 bytes
+   (−49.8%). Triangles, clipping, perspective and zoom are unchanged.
+3. **Post-installation measurement**: after restarting `plasmashell` and loading
+   the new libraries, the `plasmashell` GFX engine from DRM `fdinfo` was 12.3%
+   stable across three 6–10 second samples. The earlier 35–40% value was total
+   GPU usage, including KWin and other applications, and is not directly
+   comparable. At the same metric, the reduction in vertices and CPU work is
+   included in this value.
+
+## References
+
+- [QQuickFramebufferObject](https://doc.qt.io/qt-6/qquickframebufferobject.html)
+- [QRhi](https://doc.qt.io/qt-6/qrhi.html)
+- [Qt Quick scene-graph renderer selection](https://doc.qt.io/qt-6/qtquick-visualcanvas-scenegraph-renderer.html)

@@ -1,115 +1,112 @@
-# Specifica del progetto
+# Specification
 
-Versione di riferimento: 1.1.0
-Plugin Plasma: `org.xmbflow.interactive`
-Repository locale: `xmb-native-plasma`
+Reference version: 1.1.0
+Plasma package ID: `org.xmbflow.interactive`
+Repository: `plasma-interactive-flow-wallpaper`
 
-## Obiettivo
+## Purpose
 
-Fornire un wallpaper nativo per KDE Plasma 6 ispirato all'estetica XMB di
-PlayStation 3, con rendering interattivo di onde e particelle tramite Qt Quick
-OpenGL e integrazione con Wayland.
+Provide a native KDE Plasma 6 wallpaper inspired by the PlayStation 3 XMB
+visual language, with interactive waves and particles rendered through Qt Quick
+OpenGL and integrated with Wayland.
 
-Il progetto deve essere installabile per l'utente corrente senza modificare i
-file di sistema e deve poter essere rimosso con uno script dedicato.
+The project must install for the current user without modifying system files
+and must provide a dedicated removal path.
 
-## Requisiti funzionali
+## Functional requirements
 
-1. Il wallpaper deve essere riconosciuto da Plasma come `Plasma/Wallpaper`.
-2. Il renderer deve usare `QQuickFramebufferObject` e OpenGL.
-3. La configurazione deve essere disponibile da Plasma tramite `config.qml`.
-4. Le impostazioni devono includere almeno qualità mesh, FPS, particelle,
-   velocità, luminosità, interazione mouse e pausa.
-5. Il mouse deve deformare localmente il campo quando l'interazione è attiva.
-6. Lo zoom deve usare il puntatore come pivot e rispettare i limiti definiti
-   da `src/zoomconstraints.h`.
-7. Il rendering multischermo collegato deve usare una superficie virtuale
-   globale, non una fase indipendente per ogni monitor.
-8. Il wallpaper deve poter sospendere il rendering quando è nascosto, coperto
-   oppure messo in pausa manualmente.
-9. Il componente `SystemUsage` deve aggiornare CPU/GPU ogni 300 ms quando è
-   presente nella configurazione.
-10. La rimozione deve disinstallare il package Plasma e lo script KWin del
-    progetto senza cancellare le impostazioni generali di Plasma.
+1. Plasma must recognize the package as `Plasma/Wallpaper`.
+2. The renderer must use `QQuickFramebufferObject` and OpenGL.
+3. Configuration must be available through Plasma's `config.qml` page.
+4. Configuration must expose mesh quality, FPS, particles, speed, brightness,
+   pointer interaction and pause controls.
+5. Pointer interaction must deform the field when enabled.
+6. Wheel zoom must use the pointer as its pivot and obey the limits in
+   `src/zoomconstraints.h`.
+7. Linked multi-monitor rendering must use one global virtual surface rather
+   than an independent phase for each monitor.
+8. Rendering must be pausable when hidden, covered or manually paused.
+9. `SystemUsage` must refresh CPU/GPU readings every 300 ms when included in
+   the configuration page.
+10. Removal must uninstall the Plasma package and the project's KWin script
+    without deleting unrelated Plasma settings.
 
-## Requisiti non funzionali
+## Non-functional requirements
 
 - C++20.
-- CMake 3.22 o superiore.
-- Qt 6.6 o superiore: Core, Gui, Quick, Qml, OpenGL e DBus.
-- Build out-of-source con Ninja consigliata.
-- Test automatici eseguibili con CTest.
-- Nessuna dipendenza da Qt WebEngine, Chromium o HTML.
-- Nessun segreto, configurazione personale o binario generato nel repository.
+- CMake 3.22 or newer.
+- Qt 6.6 or newer: Core, Gui, Quick, Qml, OpenGL and DBus.
+- Out-of-source build, preferably with Ninja.
+- Tests runnable through CTest.
+- No dependency on Qt WebEngine, Chromium or HTML.
+- No secrets, personal configuration or generated binaries in Git.
 
-## Architettura
+## Architecture
 
 ```text
 Plasma WallpaperItem
 ├── package/contents/ui/main.qml
 │   └── XmbRendererItem
 │       └── QQuickFramebufferObject
-│           ├── mesh e proiezione globale
-│           ├── texture spline CPU/GPU
-│           ├── shader delle onde
-│           └── shader delle particelle
+│           ├── global mesh and projection
+│           ├── CPU/GPU spline texture
+│           ├── wave shaders
+│           └── particle shaders
 ├── package/contents/ui/config.qml
-│   └── impostazioni Plasma + SystemUsage
+│   └── Plasma settings + SystemUsage
 ├── src/xmbnativeplugin.cpp
-│   └── registrazione dei tipi QML nativi
+│   └── native QML type registration
 └── kwin-script/contents/code/main.js
-    └── rilevamento output coperti e pausa per monitor
+    └── covered-output detection and per-output pause
 ```
 
-## Contratto multischermo
+## Multi-monitor contract
 
-Ogni istanza del wallpaper riceve l'origine e la dimensione del proprio output,
-la dimensione del desktop virtuale e una dimensione di riferimento. Il renderer
-calcola il campo nella stessa superficie logica globale e ritaglia il risultato
-sul monitor locale. Questo mantiene continuità di fase su giunzioni orizzontali
-e verticali, anche con monitor di dimensioni differenti.
+Each wallpaper instance receives its output origin and size, the virtual desktop
+size and a reference size. The renderer evaluates the field in the same global
+logical surface and clips the result to the local output. This preserves phase
+continuity across horizontal and vertical seams, including layouts with
+unequal monitor sizes.
 
-La modalità diagnostica deve mostrare una griglia globale continua. Lo script
-`scripts/multiscreen-diagnose.sh` stampa la topologia reale e un esempio di
-mappatura; i valori DP-1/DP-2 presenti nello script sono solo il caso usato
-nello sviluppo, non un requisito hardware.
+Diagnostic mode must display a continuous global grid. The coordinates printed
+by `scripts/multiscreen-diagnose.sh` are an example from development, not a
+hardware requirement.
 
-## Contratto SystemUsage
+## SystemUsage contract
 
-- CPU: lettura dell'aggregato `cpu` da `/proc/stat`.
-- Frequenza: timer Qt preciso da 300 ms.
-- GPU: enumerazione di tutte le schede in `/sys/class/drm/card*`.
-- Metriche dirette preferite: `gpu_busy_percent` e `gt_busy_percent`.
-- Fallback: differenza dei contatori `engine/*/busy_time`.
-- Più GPU: viene mostrata la scheda con il valore diretto più alto.
-- Sistema non Linux o driver senza metriche DRM: il dato GPU non è garantito.
+- CPU: aggregate `cpu` line from `/proc/stat`.
+- Sampling: precise Qt timer at 300 ms.
+- GPU: enumerate every `/sys/class/drm/card*` adapter.
+- Preferred direct metrics: `gpu_busy_percent` and `gt_busy_percent`.
+- Fallback: deltas of `engine/*/busy_time` counters.
+- Multiple GPUs: report the busiest adapter when direct metrics are available.
+- Non-Linux systems or drivers without DRM metrics: GPU data is not guaranteed.
 
-## Installazione e rollback
+## Installation and rollback contract
 
-La build genera il plugin direttamente in:
+The build writes the native plugin directly to:
 
 ```text
 package/contents/ui/xmbnative/libxmbnativeplugin.so
 ```
 
-Lo script di installazione:
+The installer:
 
-1. verifica gli strumenti necessari;
-2. compila il progetto;
-3. rimuove il vecchio package con lo stesso ID, se presente;
-4. installa il package Plasma per l'utente corrente;
-5. riavvia `plasmashell`;
-6. installa e ricarica lo script KWin di supporto.
+1. checks the required tools;
+2. builds the project;
+3. removes an older package with the same ID, if present;
+4. installs the Plasma package for the current user;
+5. restarts `plasmashell`;
+6. installs and reloads the companion KWin script.
 
-L'installazione modifica lo stato della sessione Plasma corrente. Prima di
-usarla su una configurazione importante è necessario creare un backup del
-package installato. Per un rollback usare `uninstall.sh` e reinstallare la
-versione precedente.
+Installation changes the current Plasma session. Create a backup before testing
+renderer changes. Use `uninstall.sh` to roll back the package and script, then
+reinstall the previous version if required.
 
-## Non-obiettivi
+## Non-goals
 
-- Supporto a Plasma 5.
-- Supporto a Windows o macOS.
-- Compatibilità con desktop diversi da KDE Plasma.
-- Cifratura o autenticazione: non applicabili a questo tipo di package.
-- Misurazione energetica precisa per singolo wallpaper.
+- Plasma 5 support.
+- Windows or macOS support.
+- Desktop environments other than KDE Plasma.
+- Authentication or encryption, which are not applicable to a local wallpaper.
+- Precise energy attribution to this wallpaper alone.

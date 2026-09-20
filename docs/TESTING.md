@@ -1,17 +1,17 @@
-# Strategia di verifica
+# Testing strategy
 
-## Verifica automatica
+## Automated checks
 
-La suite CTest copre:
+The CTest suite covers:
 
-- limiti dello zoom;
-- visibilità della mesh;
-- geometria e deduplicazione della mesh;
-- equivalenza della spline CPU/GPU;
-- percorso GPU della spline;
-- visibilità e pausa per output.
+- zoom limits;
+- mesh visibility;
+- mesh geometry and deduplication;
+- CPU/GPU spline equivalence;
+- the GPU spline path;
+- output visibility and pause behavior.
 
-Comandi:
+Run:
 
 ```bash
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
@@ -19,33 +19,34 @@ cmake --build build --parallel 1
 ctest --test-dir build --output-on-failure
 qmllint package/contents/ui/main.qml package/contents/ui/config.qml
 bash -n install.sh uninstall.sh scripts/*.sh
+./scripts/check-version.sh
 ```
 
-## Verifica manuale post-installazione
+## Manual post-installation checks
 
-1. Installare il package nella sessione Plasma.
-2. Aprire la configurazione del wallpaper.
-3. Verificare che la pagina impostazioni sia visibile.
-4. Verificare hover, pressione e rilascio del mouse.
-5. Verificare rotella, zoom minimo/massimo e sensibilità.
-6. Verificare i preset mesh e particelle.
-7. Su più monitor, abilitare `Multischermo` e `Diagnostica`.
-8. Controllare la continuità della griglia sulla giunzione.
-9. Coprire completamente un monitor con una finestra e verificare la pausa.
-10. Usare `scripts/diagnose.sh` e controllare i log di `plasmashell`.
+1. Install the package in a Plasma session.
+2. Open the wallpaper configuration page.
+3. Confirm that the settings page is visible.
+4. Check pointer hover, press and release behavior.
+5. Check wheel zoom, minimum/maximum limits and sensitivity.
+6. Check mesh and particle presets.
+7. On multiple monitors, enable the `Multiscreen` and `Diagnostic` options.
+8. Confirm grid continuity at monitor seams.
+9. Cover one monitor completely with a window and verify its pause.
+10. Run `scripts/diagnose.sh` and inspect the `plasmashell` log.
 
-## Criteri di accettazione
+## Acceptance criteria
 
-Una release è pronta solo se:
+A release is ready only when:
 
-- la configurazione CMake termina correttamente;
-- tutti i test CTest terminano con esito positivo;
-- `qmllint` non segnala errori;
-- gli script Bash superano `bash -n`;
-- il package Plasma viene installato e riconosciuto;
-- il wallpaper resta visibile dopo il riavvio di `plasmashell`;
-- nessun build artifact o backup locale è tracciato da Git;
-- il rollback tramite `uninstall.sh` è eseguibile.
+- CMake configuration succeeds;
+- all CTest cases pass;
+- `qmllint` reports no errors;
+- all Bash scripts pass `bash -n`;
+- Plasma recognizes and installs the package;
+- the wallpaper remains available after restarting `plasmashell`;
+- no build artifact or local backup is tracked by Git;
+- rollback through `uninstall.sh` is available.
 
-La verifica automatica non sostituisce la verifica visiva del renderer e del
-comportamento multischermo.
+Automated checks do not replace visual verification of the renderer or manual
+multi-monitor testing.

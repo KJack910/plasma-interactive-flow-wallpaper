@@ -1,83 +1,81 @@
-# Audit di portabilità e generalità
+# Portability and generality audit
 
-Audit eseguito il 20 settembre 2026 sul progetto `xmb-native-plasma`.
+Audit date: September 20, 2026.
 
-## Risultato sintetico
+## Summary
 
-Il sistema è generale all'interno del seguente perimetro:
+The system is general within this target boundary:
 
 ```text
-Linux + KDE Plasma 6 + Qt 6.6+ + OpenGL 3.3+ + sessione utente Plasma
+Linux + KDE Plasma 6 + Qt 6.6+ + OpenGL 3.3+ + user Plasma session
 ```
 
-Non è un wallpaper multipiattaforma in senso Windows/macOS. La parte grafica
-C++ usa Qt, ma l'integrazione, l'installazione e il monitoraggio hardware usano
-interfacce Linux/KDE specifiche.
+It is not a cross-platform Windows/macOS wallpaper. The C++ renderer uses Qt,
+but installation, desktop integration and hardware monitoring use Linux/KDE
+interfaces.
 
-## Matrice di compatibilità
+## Compatibility matrix
 
-| Area | Stato | Perimetro verificato |
+| Area | Status | Verified boundary |
 |---|---|---|
-| Compilazione C++ | Generale su Linux con Qt 6 | CMake 3.22+, Ninja, C++20 |
-| Rendering | Dipendente dalla GPU | OpenGL 3.3+ |
-| Plasma package | Specifico KDE | Plasma 6, `kpackagetool6` |
-| Sessione | Specifica desktop | KDE Plasma, Wayland verificato |
-| Multischermo | Generale nel modello logico | Layout rettangolari, anche sfalsati |
-| CPU usage | Specifico Linux | `/proc/stat` |
-| GPU usage | Specifico Linux/DRM | `gpu_busy_percent`, `gt_busy_percent`, `busy_time` |
-| Pausa per output | Specifica KDE/KWin | QtDBus + script KWin |
-| Dipendenze automatiche | Limitata | `pacman`/Arch attualmente |
-| Windows/macOS | Non supportati | nessun package/installer previsto |
-| Plasma 5 | Non supportato | API e strumenti Plasma 6 |
+| C++ build | General on Linux with Qt 6 | CMake 3.22+, Ninja, C++20 |
+| Rendering | GPU-dependent | OpenGL 3.3+ |
+| Plasma package | KDE-specific | Plasma 6, `kpackagetool6` |
+| Session | Desktop-specific | KDE Plasma, Wayland verified |
+| Multi-monitor | General logical model | Rectangular and offset layouts |
+| CPU usage | Linux-specific | `/proc/stat` |
+| GPU usage | Linux/DRM-specific | direct metrics and `busy_time` fallback |
+| Per-output pause | KDE/KWin-specific | QtDBus + KWin script |
+| Automatic dependencies | Limited | Arch/pacman currently |
+| Windows/macOS | Unsupported | no package or installer target |
+| Plasma 5 | Unsupported | Plasma 6 APIs and tools |
 
-## Verifiche eseguite localmente
+## Local verification
 
-Sul sistema di sviluppo attuale sono stati verificati:
+The current development system verified:
 
-- CMake disponibile;
-- Ninja disponibile;
-- Qt 6 e `qmllint` disponibili;
-- `kpackagetool6`, `plasmashell`, `systemctl` e `qdbus6` disponibili;
-- configurazione CMake riuscita;
-- compilazione Release riuscita senza lavoro pendente;
-- 6 test CTest superati;
-- lint QML superato senza output di errore;
-- sintassi Bash verificata per gli script di installazione, rimozione,
-  build e diagnostica.
+- CMake, Ninja and a C++ compiler;
+- Qt 6 and `qmllint`;
+- `kpackagetool6`, `plasmashell`, `systemctl` and `qdbus6`;
+- successful CMake configuration;
+- successful Release build;
+- six passing CTest cases;
+- QML lint without errors;
+- Bash syntax for build, installation, removal and diagnostic scripts.
 
-Queste verifiche dimostrano la riproducibilità della build nel target Linux/KDE
-locale. Non dimostrano una build su Debian, Fedora, Windows o macOS.
+This demonstrates reproducible behavior in the local Linux/KDE target. It does
+not prove a build on Debian, Fedora, Windows or macOS.
 
-## Perché non è completamente generico
+## Why the system is not fully generic
 
-1. `/proc/stat` e `/sys/class/drm` non esistono su Windows/macOS.
-2. `kpackagetool6`, `kwriteconfig6`, `qdbus6` e `plasmashell` appartengono allo
-   stack KDE Plasma.
-3. Il riavvio usa `systemctl --user` e presuppone una sessione systemd utente.
-4. `scripts/install.sh --deps` usa pacman e nomi pacchetto Arch.
-5. Il renderer è `QQuickFramebufferObject` OpenGL; non usa il backend Vulkan
-   della singola wallpaper instance.
-6. Le impostazioni e il package metadata sono specifici di `Plasma/Wallpaper`.
+1. `/proc/stat` and `/sys/class/drm` are not available on Windows/macOS.
+2. `kpackagetool6`, `kwriteconfig6`, `qdbus6` and `plasmashell` are KDE tools.
+3. Restarting the shell uses `systemctl --user` and assumes a user systemd
+   session.
+4. `scripts/install.sh --deps` uses Arch package names through pacman.
+5. The renderer uses the OpenGL `QQuickFramebufferObject` path; Vulkan is not
+   selected by an individual wallpaper instance.
+6. Package metadata and installation are specific to `Plasma/Wallpaper`.
 
-## Cosa è riutilizzabile fuori dal sistema di sviluppo
+## Reusable parts outside the development system
 
-- il renderer C++/Qt e la maggior parte degli shader;
-- i test matematici di mesh, spline, zoom e visibilità;
-- il modello della superficie virtuale multischermo;
-- la struttura CMake;
-- il package Plasma, su altre distribuzioni Linux con Plasma 6;
-- il fallback GPU DRM su driver che espongono i contatori previsti.
+- the Qt/C++ renderer and most shader code;
+- mathematical tests for mesh, spline, zoom and visibility;
+- the global virtual-desktop model;
+- the CMake structure;
+- the Plasma package on other Linux distributions with Plasma 6;
+- the DRM GPU fallback on drivers exposing the expected counters.
 
-## Cosa serve per aumentare la generalità
+## Work required for broader support
 
-Per supportare più distribuzioni Linux:
+For more Linux distributions:
 
-- aggiungere documentazione dei pacchetti equivalenti;
-- separare la build dalla fase di installazione Plasma;
-- aggiungere un installer senza `sudo pacman` obbligatorio;
-- testare almeno una distribuzione Debian/Ubuntu e una Fedora/KDE;
-- rendere opzionali le integrazioni KWin e SystemUsage.
+- document equivalent packages;
+- separate build from Plasma installation;
+- provide an installer that does not require pacman;
+- test at least one Debian/Ubuntu and one Fedora/KDE environment;
+- make KWin and SystemUsage integrations optional.
 
-Per supportare Windows/macOS sarebbe necessario un porting separato di package,
-installazione, lettura CPU/GPU, lifecycle del desktop e integrazione del
-wallpaper; non è un'estensione della sola build CMake.
+Windows/macOS support would require separate ports for package installation,
+CPU/GPU metrics, desktop lifecycle and wallpaper integration. It is not a
+consequence of changing only the CMake generator.

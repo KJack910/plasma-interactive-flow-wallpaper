@@ -1,114 +1,108 @@
-# Installazione
+# Installation
 
-## Prerequisiti
+## Prerequisites
 
-Ambiente supportato:
+Supported environment:
 
-- Linux con sessione KDE Plasma 6;
-- Wayland consigliato e verificato;
+- Linux with KDE Plasma 6;
+- Wayland is the verified session type;
 - CMake 3.22+;
 - Ninja;
-- compilatore C++20;
-- Qt 6.6+ con Core, Gui, Quick, Qml, OpenGL e DBus;
-- `kpackagetool6`, `kwriteconfig6`, `qdbus6` e `plasmashell`;
-- OpenGL 3.3 o superiore per il renderer.
+- a C++20 compiler;
+- Qt 6.6+ with Core, Gui, Quick, Qml, OpenGL and DBus;
+- `kpackagetool6`, `kwriteconfig6`, `qdbus6` and `plasmashell`;
+- OpenGL 3.3+ for the renderer.
 
-Per la pausa automatica sui monitor coperti è necessario anche il supporto allo
-script KWin e il comando `kscreen-doctor` per la diagnostica dei display.
+Automatic per-output pause also requires the KWin script integration. The
+multi-monitor diagnostic script requires `kscreen-doctor`.
 
-## Arch Linux, CachyOS e derivate
+## Arch Linux, CachyOS and derivatives
 
-Lo script può installare le dipendenze di compilazione:
+The helper can install build dependencies with:
 
 ```bash
 ./scripts/install.sh --deps
 ```
 
-Senza installare dipendenze:
+Without dependency installation:
 
 ```bash
 ./scripts/build.sh
 ```
 
-## Build manuale
+## Manual build
 
 ```bash
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build --parallel 1
 ```
 
-La libreria viene prodotta in:
+The native plugin is generated at:
 
 ```text
 package/contents/ui/xmbnative/libxmbnativeplugin.so
 ```
 
-## Test e lint
+## Tests and lint
 
 ```bash
 ctest --test-dir build --output-on-failure
 qmllint package/contents/ui/main.qml package/contents/ui/config.qml
 bash -n install.sh uninstall.sh scripts/*.sh
+./scripts/check-version.sh
 ```
 
-## Installazione nella sessione Plasma corrente
+## Installation in the current Plasma session
 
-Dopo build e test:
+After the build and checks:
 
 ```bash
 ./install.sh
 ```
 
-Oppure:
+The script installs the package for the current user, restarts `plasmashell`
+and installs the `xmbfullscreenbridge` KWin script.
 
-```bash
-./scripts/install.sh
-```
-
-Lo script installa il package per l'utente corrente, riavvia `plasmashell` e
-installa lo script KWin `xmbfullscreenbridge`.
-
-Aprire poi:
+Then open:
 
 ```text
-Tasto destro sul desktop → Configura desktop e sfondo → XMB Interactive Flow
+Desktop context menu → Configure Desktop and Wallpaper → XMB Interactive Flow
 ```
 
-## Diagnostica
+## Diagnostics
 
 ```bash
 ./scripts/diagnose.sh
 ./scripts/multiscreen-diagnose.sh
 ```
 
-Per i log di Plasma:
+For Plasma logs:
 
 ```bash
 journalctl --user -u plasma-plasmashell.service -f
 ```
 
-## Rimozione
+## Removal
 
 ```bash
 ./uninstall.sh
 ```
 
-La rimozione disinstalla il package e disabilita lo script KWin del progetto.
+Removal uninstalls the package and disables the project's KWin script.
 
-## Altre distribuzioni
+## Other distributions
 
-La compilazione è portabile verso altre distribuzioni Linux se sono disponibili
-le dipendenze equivalenti. Lo script `--deps`, però, è attualmente specifico
-per pacman/Arch e non tenta di indovinare i nomi dei pacchetti per Debian,
-Fedora o altre distribuzioni.
+The source can build on other Linux distributions when equivalent dependencies
+are available. The `--deps` option is currently specific to Arch/pacman and
+does not guess package names for Debian, Fedora or other distributions.
 
-Su queste distribuzioni installare manualmente:
+Install the following equivalents manually:
 
-- CMake e Ninja;
-- compilatore C++20;
-- Qt 6 Core, Gui, Quick, Qml, OpenGL e DBus;
-- strumenti KDE Plasma 6 per KPackage, KWin e plasmashell.
+- CMake and Ninja;
+- a C++20 compiler;
+- Qt 6 Core, Gui, Quick, Qml, OpenGL and DBus;
+- KDE Plasma 6 tools for KPackage, KWin and plasmashell.
 
-Dopo l'installazione manuale, eseguire la build e i test con i comandi sopra.
-La fase di installazione resta legata alla presenza di una sessione Plasma 6
-attiva e ai comandi KDE indicati.
+After manual dependency installation, use the build and test commands above.
+Installation still requires an active Plasma 6 session and the KDE commands
+listed in the prerequisites.
