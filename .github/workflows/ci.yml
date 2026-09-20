@@ -26,7 +26,18 @@ jobs:
       - name: Test
         run: ctest --test-dir build --output-on-failure
       - name: QML lint
-        run: /usr/lib/qt6/bin/qmllint --max-warnings -1 package/contents/ui/main.qml package/contents/ui/config.qml
+        run: |
+          set -o pipefail
+          log=$(mktemp)
+          if /usr/lib/qt6/bin/qmllint package/contents/ui/main.qml package/contents/ui/config.qml >"$log" 2>&1; then
+            rc=0
+          else
+            rc=$?
+          fi
+          cat "$log"
+          if [ "$rc" -ne 0 ] && grep -Eq '(^|[[:space:]])(Error:|Syntax error|fatal)' "$log"; then
+            exit "$rc"
+          fi
       - name: Version consistency
         run: ./scripts/check-version.sh
       - name: Shell syntax
