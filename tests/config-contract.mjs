@@ -47,8 +47,11 @@ assert.doesNotMatch(config, /i18n\(\"Diagnostics:\"\)/,
     "the diagnostics-only control must not destabilize the normal settings layout");
 assert.match(config, /Horizontal overscan:/,
     "horizontal overscan must remain available in the settings page");
-assert.match(config, /checked:\s*root\.cfg_horizontalOverscan/,
-    "horizontal overscan must be bound to its saved configuration value");
+assert.match(main, /zoom:\s*Math\.max\(Boolean\(root\.cfg\.horizontalOverscan \?\? true\) \? 0\.40 : 1\.0,\s*Number\(root\.cfg\.zoom \?\? 1\.0\)\)/,
+    "overscan off must clamp the horizontal fit mode to base zoom 1.0");
+assert.match(config, /from:\s*root\.cfg_horizontalOverscan \? 0\.40 : 1\.0/,
+    "the base-zoom control must prevent sub-1 zoom when overscan is disabled");
+
 const renderBody = rendererSource.split("    void render() override\n    {")[1]?.split("\nprivate:")[0];
 assert.ok(renderBody, "the renderer render body must be present");
 assert.doesNotMatch(renderBody, /if \(!m_horizontalOverscan\)[\s\S]*glScissor/,

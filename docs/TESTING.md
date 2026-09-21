@@ -42,7 +42,7 @@ python3 tests/test-kscreen-topology.py
 10. Run `scripts/multiscreen-diagnose.sh` and verify that it reports the actual output names, rectangles and virtual bounds.
 11. Confirm grid continuity at monitor seams, including unequal and vertically offset outputs.
 12. Toggle `Energy saving` off; verify that a fully covered output keeps rendering, then enable it and verify the covered-output pause resumes.
-13. Toggle `Horizontal overscan` off and verify complete rendering at each output edge at base zoom 1.0; enable it and verify waves/particles can continue past the horizontal desktop bounds. Repeat at zoom values below 1.0 only to check intentional camera centering, not overscan.
+13. Toggle `Horizontal overscan` off and verify complete rendering at each output edge at base zoom 1.0; the Base zoom control must clamp to 1.0 in this mode. Enable overscan to restore the 0.40–3.50 range and verify waves/particles can continue past horizontal desktop bounds.
 14. Run `scripts/diagnose.sh` and inspect the `plasmashell` log.
 
 ## Acceptance criteria

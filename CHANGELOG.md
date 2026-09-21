@@ -15,6 +15,7 @@ Semantic Versioning.
 - Made Energy saving the master switch for automatic hidden/covered-output pausing.
 - Unified hidden and covered-output pausing into one Energy saving setting.
 - Removed zoom-derived overscan-off scissoring so disabled overscan still fills each output and clips only at the framebuffer boundary.
+- Clamped sub-1 base zoom to 1.0 while overscan is disabled, preventing a centered virtual-desktop island from being mistaken for incomplete output rendering.
 - Rebuilt the Italian catalog during installation and removed absolute local paths from the translation template.
 
 ## [1.1.0] - 2026-09-20
