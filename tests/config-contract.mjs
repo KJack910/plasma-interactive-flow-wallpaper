@@ -47,14 +47,10 @@ assert.doesNotMatch(config, /i18n\(\"Diagnostics:\"\)/,
     "the diagnostics-only control must not destabilize the normal settings layout");
 assert.match(config, /Horizontal overscan:/,
     "horizontal overscan must remain available in the settings page");
-assert.match(rendererSource, /uViewportOriginPx\.x\s*\+\s*\(uv\.x\s*\*\s*\(uHorizontalDomain\.y\s*-\s*uHorizontalDomain\.x\)\s*\+\s*uHorizontalDomain\.x\)\s*\*\s*uViewportSizePx\.x/,
-    "the wave domain must be anchored to the physical output, not the whole virtual desktop");
-assert.match(rendererSource, /float horizontalZoom = max\(uZoom, 1\.0\)/,
-    "sub-1 horizontal zoom must still fill the physical output");
-assert.match(rendererSource, /float screenX = interactionBaseWorld\.x \* horizontalZoom/,
-    "the visible horizontal projection must be independent from overscan");
-assert.match(rendererSource, /float particleWorldX = uViewportOriginPx\.x\s*\+\s*globalU\s*\*\s*uViewportSizePx\.x/,
-    "particles must use the same physical-output domain as waves");
+assert.match(main, /zoom:\s*Math\.max\(Boolean\(root\.cfg\.horizontalOverscan \?\? true\) \? 0\.40 : 1\.0,\s*Number\(root\.cfg\.zoom \?\? 1\.0\)\)/,
+    "overscan off must clamp the horizontal fit mode to base zoom 1.0");
+assert.match(config, /from:\s*root\.cfg_horizontalOverscan \? 0\.40 : 1\.0/,
+    "the base-zoom control must prevent sub-1 zoom when overscan is disabled");
 
 const renderBody = rendererSource.split("    void render() override\n    {")[1]?.split("\nprivate:")[0];
 assert.ok(renderBody, "the renderer render body must be present");

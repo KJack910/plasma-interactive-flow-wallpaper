@@ -14,9 +14,8 @@ Semantic Versioning.
 - Removed the layout-sensitive Diagnostics checkbox from the normal wallpaper settings page.
 - Made Energy saving the master switch for automatic hidden/covered-output pausing.
 - Unified hidden and covered-output pausing into one Energy saving setting.
-- Mapped each renderer to its physical output rectangle while preserving global phase continuity across the virtual desktop.
-- Made the visible horizontal projection independent from Horizontal overscan; sub-1 zoom still fills the physical output horizontally.
-- Kept overscan as extra source geometry outside the output, with natural framebuffer clipping at the physical edges.
+- Removed zoom-derived overscan-off scissoring so disabled overscan still fills each output and clips only at the framebuffer boundary.
+- Clamped sub-1 base zoom to 1.0 while overscan is disabled, preventing a centered virtual-desktop island from being mistaken for incomplete output rendering.
 - Rebuilt the Italian catalog during installation and removed absolute local paths from the translation template.
 
 ## [1.1.0] - 2026-09-20

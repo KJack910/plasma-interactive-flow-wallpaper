@@ -25,7 +25,7 @@ WallpaperItem {
         mouseStrength: Number(root.cfg.mouseStrength ?? 1.0)
         interactionRadius: Number(root.cfg.interactionRadius ?? 1.0)
         brightness: Number(root.cfg.brightness ?? 1.0)
-        zoom: Number(root.cfg.zoom ?? 1.0)
+        zoom: Math.max(Boolean(root.cfg.horizontalOverscan ?? true) ? 0.40 : 1.0, Number(root.cfg.zoom ?? 1.0))
         zoomSensitivity: Number(root.cfg.zoomSensitivity ?? 0.60)
         flowGroupOffset: Number(root.cfg.flowGroupOffset ?? 1.28)
         flowSpacing: Number(root.cfg.flowSpacing ?? 0.68)
