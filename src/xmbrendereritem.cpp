@@ -151,13 +151,13 @@ out float vDepth;
 void main() {
     vec2 uv = (aPos + 1.0) * 0.5;
 
-    // Build one complete virtual-desktop mesh in every renderer. Projection is
-    // performed in this shared scene before the result is converted to the
-    // local output NDC, so perspective and zoom cannot restart at a seam.
-    // Keep a horizontal overscan so waves continue beyond both screen edges.
-    // Wide source domain prevents dynamic zoom from exhausting the mesh at
-    // either horizontal edge (the visible viewport still performs clipping).
-    float worldX = (uv.x * (uHorizontalDomain.y - uHorizontalDomain.x) + uHorizontalDomain.x) * uVirtualSizePx.x;
+    // Build the mesh in the current physical output's coordinate range. The
+    // resulting worldX stays global, so phase and scene continuity survive
+    // different monitor sizes and layouts. Horizontal overscan only extends
+    // this output-local source range beyond its framebuffer edges.
+    float worldX = uViewportOriginPx.x
+        + (uv.x * (uHorizontalDomain.y - uHorizontalDomain.x) + uHorizontalDomain.x)
+        * uViewportSizePx.x;
     float desktopU = worldX / max(uVirtualSizePx.x, 1.0);
     float phaseU = worldX / max(uReferenceSizePx.x, 1.0);
     float waveX = phaseU * 2.0 - 1.0;
@@ -208,7 +208,10 @@ void main() {
     vec2 interactionBaseWorld = vec2(
         uVirtualSizePx.x * 0.5 + projectedBase.x * uReferenceSizePx.x * 0.5,
         uVirtualSizePx.y * 0.5 - renderYSign * projectedBase.y * uReferenceSizePx.y * 0.5);
-    vec2 screen = interactionBaseWorld * uZoom + uZoomOffsetPx;
+    float horizontalZoom = max(uZoom, 1.0);
+    float horizontalOffset = (uZoom >= 1.0) ? uZoomOffsetPx.x : 0.0;
+    float screenX = interactionBaseWorld.x * horizontalZoom + horizontalOffset;
+    vec2 screen = vec2(screenX, interactionBaseWorld.y * uZoom + uZoomOffsetPx.y);
     // Qt reports the pointer from the top-left, while the FBO interaction
     // surface is bottom-left based. Convert only the pointer position here.
     vec2 pointerFramebuffer = uPointer;
@@ -244,7 +247,9 @@ void main() {
     vec2 projectedBaseWorld = vec2(
         uVirtualSizePx.x * 0.5 + projected.x * uReferenceSizePx.x * 0.5,
         uVirtualSizePx.y * 0.5 - renderYSign * projected.y * uReferenceSizePx.y * 0.5);
-    vec2 projectedWorld = projectedBaseWorld * uZoom + uZoomOffsetPx;
+    vec2 projectedWorld = vec2(
+        projectedBaseWorld.x * horizontalZoom + horizontalOffset,
+        projectedBaseWorld.y * uZoom + uZoomOffsetPx.y);
     vec2 localUv = (projectedWorld - uViewportOriginPx) / uViewportSizePx;
     vec2 localNdc = vec2(localUv.x * 2.0 - 1.0, 1.0 - localUv.y * 2.0);
     gl_Position = vec4(localNdc, clamp(p.z * 0.22, -0.95, 0.95), 1.0);
@@ -398,7 +403,7 @@ void main() {
     globalU += sin(time * 0.9 * travelScale + aSeed.y * 15.0 + aSeed.x * 9.0) * 0.0175;
     if (uHorizontalDomain.x == 0.0)
         globalU = clamp(globalU, 0.0, 1.0);
-    float particleWorldX = globalU * uVirtualSizePx.x;
+    float particleWorldX = uViewportOriginPx.x + globalU * uViewportSizePx.x;
     float x = (particleWorldX - uVirtualSizePx.x * 0.5)
         * 2.0 / max(uReferenceSizePx.x, 1.0);
     float phaseU = particleWorldX / max(uReferenceSizePx.x, 1.0);
@@ -472,7 +477,10 @@ void main() {
     vec2 interactionBaseWorld = vec2(
         uVirtualSizePx.x * 0.5 + projectedBase.x * uReferenceSizePx.x * 0.5,
         uVirtualSizePx.y * 0.5 - renderYSign * projectedBase.y * uReferenceSizePx.y * 0.5);
-    vec2 screen = interactionBaseWorld * uZoom + uZoomOffsetPx;
+    float horizontalZoom = max(uZoom, 1.0);
+    float horizontalOffset = (uZoom >= 1.0) ? uZoomOffsetPx.x : 0.0;
+    float screenX = interactionBaseWorld.x * horizontalZoom + horizontalOffset;
+    vec2 screen = vec2(screenX, interactionBaseWorld.y * uZoom + uZoomOffsetPx.y);
     vec2 pointerFramebuffer = uPointer;
     // The directional interaction source points from the particle to the
     // cursor. Keeping this orientation makes positive X/Y signs carry the
@@ -540,7 +548,9 @@ void main() {
     vec2 projectedBaseWorld = vec2(
         uVirtualSizePx.x * 0.5 + projected.x * uReferenceSizePx.x * 0.5,
         uVirtualSizePx.y * 0.5 - renderYSign * projected.y * uReferenceSizePx.y * 0.5);
-    vec2 projectedWorld = projectedBaseWorld * uZoom + uZoomOffsetPx;
+    vec2 projectedWorld = vec2(
+        projectedBaseWorld.x * horizontalZoom + horizontalOffset,
+        projectedBaseWorld.y * uZoom + uZoomOffsetPx.y);
     vec2 localUv = (projectedWorld - uViewportOriginPx) / uViewportSizePx;
     vec2 localNdc = vec2(localUv.x * 2.0 - 1.0, 1.0 - localUv.y * 2.0);
     float zoomParticleScale = clamp(pow(max(uZoom, 0.40), 0.65), 0.85, 2.40);
@@ -872,7 +882,7 @@ private:
 
     void ensureGrid()
     {
-        const qreal horizontalSpan = m_virtualSizePx.width() / std::max<qreal>(1.0, m_referenceSizePx.width());
+        const qreal horizontalSpan = m_viewportSizePx.width() / std::max<qreal>(1.0, m_referenceSizePx.width());
         const int resX = XmbMesh::horizontalResolution(m_meshResolution, horizontalSpan, m_horizontalOverscan);
         const int resY = XmbQuality::verticalResolution(m_quality);
         if (m_grid.resolutionX == resX && m_grid.resolutionY == resY && m_grid.vao)
@@ -903,7 +913,6 @@ private:
             return;
         const int resX = m_grid.resolutionX;
         const qreal width = std::max<qreal>(1.0, m_virtualSizePx.width());
-        const qreal zoom = std::max<qreal>(XmbZoom::minimum, m_zoom);
         // Scene-follow mode adds cursorScene to p.x before projection. In
         // virtual pixels this is exactly mouseX minus the desktop center.
         const qreal sceneTranslationX =
@@ -912,11 +921,17 @@ private:
         // Invert the exact perspective bounds of the wave shader and reserve
         // only the interaction displacement required for this output. The
         // previous +/-0.40 virtual-width guard shaded large invisible strips.
+        const qreal horizontalZoom = std::max<qreal>(1.0, m_zoom);
+        const qreal horizontalOffset = m_zoom >= 1.0 ? m_zoomOffsetPx.x() : 0.0;
         const XmbMesh::HorizontalWindow visible = XmbMesh::visibleWorldWindow(
-            zoom, m_zoomOffsetPx.x(), m_viewportOriginPx.x(),
+            horizontalZoom, horizontalOffset, m_viewportOriginPx.x(),
             m_viewportSizePx.width(), width, m_referenceSizePx.width(),
             m_interactionRadius, m_pointerStrength, sceneTranslationX);
-        const auto columns = XmbMesh::visibleColumns(visible, width, resX, m_horizontalOverscan);
+        const XmbMesh::HorizontalWindow localVisible{
+            visible.left - m_viewportOriginPx.x(),
+            visible.right - m_viewportOriginPx.x()};
+        const auto columns = XmbMesh::visibleColumns(
+            localVisible, m_viewportSizePx.width(), resX, m_horizontalOverscan);
         const int first = columns.first;
         const int last = columns.last;
         if (first < 0)

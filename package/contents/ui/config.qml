@@ -272,8 +272,8 @@ Item {
                 Slider {
                     id: zoomSlider
                     Layout.preferredWidth: 260
-                    from: root.cfg_horizontalOverscan ? 0.40 : 1.0; to: 3.50; stepSize: 0.05
-                    value: root.cfg_horizontalOverscan ? root.cfg_zoom : Math.max(1.0, root.cfg_zoom)
+                    from: 0.40; to: 3.50; stepSize: 0.05
+                    value: root.cfg_zoom
                     onMoved: {
                         root.cfg_zoom = value
                         root.configurationChanged()
