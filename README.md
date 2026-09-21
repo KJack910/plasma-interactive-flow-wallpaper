@@ -1,5 +1,13 @@
 # Plasma Interactive Flow Wallpaper
 
+<p align="center">
+  <img src="assets/xmb-recapture-20260921-153457-gif-q3-1920x448.gif" alt="Plasma Interactive Flow Wallpaper animated preview" width="100%">
+</p>
+
+<p align="center">
+  <img src="assets/xmb-recapture-20260921-153457-virtual-aligned-4480x1044.png" alt="Plasma Interactive Flow Wallpaper virtual desktop preview" width="100%">
+</p>
+
 Version 1.1.0
 
 A native interactive wallpaper for KDE Plasma 6, inspired by the visual
