@@ -41,7 +41,7 @@ WallpaperItem {
         renderStyle: Number(root.cfg.renderStyle ?? 0)
         splineBackend: Number(root.cfg.splineBackend ?? 1)
         pauseWhenHidden: Boolean(root.cfg.pauseWhenHidden ?? true)
-        pauseWhenCovered: Boolean(root.cfg.pauseWhenHidden ?? true) && Boolean(root.cfg.pauseWhenCovered ?? true)
+        pauseWhenCovered: Boolean(root.cfg.pauseWhenHidden ?? true)
         renderingPaused: Boolean(root.cfg.renderingPaused ?? false)
         visible: !renderer.renderingPaused && !renderer.frozen
     }

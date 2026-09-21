@@ -49,7 +49,6 @@ Item {
     property int cfg_particleStyle: wallpaperConfiguration ? (wallpaperConfiguration.particleStyle ?? 0) : 0
     property int cfg_particleSimulation: wallpaperConfiguration ? (wallpaperConfiguration.particleSimulation ?? 0) : 0
     property bool cfg_pauseWhenHidden: wallpaperConfiguration ? (wallpaperConfiguration.pauseWhenHidden ?? true) : true
-    property bool cfg_pauseWhenCovered: wallpaperConfiguration ? (wallpaperConfiguration.pauseWhenCovered ?? true) : true
     property bool cfg_renderingPaused: wallpaperConfiguration ? (wallpaperConfiguration.renderingPaused ?? false) : false
 
     Native.SystemUsage {
@@ -385,20 +384,10 @@ Item {
 
             CheckBox {
                 Kirigami.FormData.label: i18n("Energy saving:")
-                text: i18n("Enable automatic pausing when the wallpaper is hidden or covered")
+                text: i18n("Pause automatically when the wallpaper is hidden or an output is fully covered")
                 checked: root.cfg_pauseWhenHidden
                 onToggled: {
                     root.cfg_pauseWhenHidden = checked
-                    root.configurationChanged()
-                }
-            }
-            CheckBox {
-                Kirigami.FormData.label: i18n("Covered outputs:")
-                text: i18n("Pause outputs fully covered by applications")
-                checked: root.cfg_pauseWhenCovered
-                enabled: root.cfg_pauseWhenHidden
-                onToggled: {
-                    root.cfg_pauseWhenCovered = checked
                     root.configurationChanged()
                 }
             }

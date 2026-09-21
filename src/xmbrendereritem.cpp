@@ -730,29 +730,14 @@ public:
         updateSplineTexture();
         ensureGrid();
         updateGridVisibleRange();
-        GLboolean scissorEnabled = GL_FALSE;
-        GLint scissorBox[4] = {};
-        if (!m_horizontalOverscan)
-        {
-            scissorEnabled = f->glIsEnabled(GL_SCISSOR_TEST);
-            f->glGetIntegerv(GL_SCISSOR_BOX, scissorBox);
-            const auto clip = XmbMesh::horizontalClip(m_zoom, m_zoomOffsetPx.x(),
-                m_virtualSizePx.width(), m_viewportOriginPx.x(), m_viewportSizePx.width(), fbSize.width());
-            const int left = scissorEnabled ? std::max(int(clip.left), scissorBox[0]) : int(clip.left);
-            const int right = scissorEnabled ? std::min(int(clip.right), scissorBox[0] + scissorBox[2]) : int(clip.right);
-            f->glEnable(GL_SCISSOR_TEST);
-            f->glScissor(left, scissorEnabled ? scissorBox[1] : 0, std::max(0, right - left),
-                         scissorEnabled ? scissorBox[3] : fbSize.height());
-        }
+        // The FBO already clips to the current output. Do not add a second
+        // zoom-derived scissor when overscan is disabled: that makes the
+        // linked virtual surface appear as a smaller centered island. The
+        // source domain controls overscan, while the output framebuffer
+        // provides the only required screen-edge clipping.
         renderWave();
         ensureParticles();
         renderParticles();
-        if (!m_horizontalOverscan)
-        {
-            f->glScissor(scissorBox[0], scissorBox[1], scissorBox[2], scissorBox[3]);
-            if (!scissorEnabled)
-                f->glDisable(GL_SCISSOR_TEST);
-        }
 
         f->glBindVertexArray(0);
         f->glUseProgram(0);

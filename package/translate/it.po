@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-interactive-flow-wallpaper 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 16:58+0200\n"
+"POT-Creation-Date: 2026-09-21 17:15+0200\n"
 "PO-Revision-Date: 2026-09-21 16:30+0200\n"
 "Last-Translator: XMB Flow project\n"
 "Language-Team: Italian\n"
@@ -11,205 +11,205 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: package/contents/ui/config.qml:95
+#: package/contents/ui/config.qml:94
 msgid "XMB Interactive Flow"
 msgstr "Flusso interattivo XMB"
 
-#: package/contents/ui/config.qml:105
+#: package/contents/ui/config.qml:104
 #, javascript-format
 msgid "CPU: %1%"
 msgstr "CPU: %1%"
 
-#: package/contents/ui/config.qml:109
+#: package/contents/ui/config.qml:108
 #, javascript-format
 msgid "GPU: %1%"
 msgstr "GPU: %1%"
 
-#: package/contents/ui/config.qml:118
+#: package/contents/ui/config.qml:117
 msgid "Pointer following:"
 msgstr "Segui puntatore:"
 
-#: package/contents/ui/config.qml:119
+#: package/contents/ui/config.qml:118
 msgid "Disabled"
 msgstr "Disattivato"
 
-#: package/contents/ui/config.qml:119
+#: package/contents/ui/config.qml:118
 msgid "Interaction only"
 msgstr "Solo interazione"
 
-#: package/contents/ui/config.qml:119
+#: package/contents/ui/config.qml:118
 msgid "Global flow + interaction"
 msgstr "Flusso globale + interazione"
 
-#: package/contents/ui/config.qml:127
+#: package/contents/ui/config.qml:126
 msgid "Particle profile:"
 msgstr "Profilo particellare:"
 
-#: package/contents/ui/config.qml:128
+#: package/contents/ui/config.qml:127
 msgid "Small"
 msgstr "Piccole"
 
-#: package/contents/ui/config.qml:128
+#: package/contents/ui/config.qml:127
 msgid "Large"
 msgstr "Grandi"
 
-#: package/contents/ui/config.qml:128
+#: package/contents/ui/config.qml:127
 msgid "Mixed"
 msgstr "Miste"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:132
 msgid "Particle simulation:"
 msgstr "Simulazione particellare:"
 
-#: package/contents/ui/config.qml:134
+#: package/contents/ui/config.qml:133
 msgid "Pseudo-2D"
 msgstr "Pseudo-2D"
 
-#: package/contents/ui/config.qml:134
+#: package/contents/ui/config.qml:133
 msgid "Volumetric 3D"
 msgstr "3D volumetrico"
 
-#: package/contents/ui/config.qml:139
+#: package/contents/ui/config.qml:138
 msgid "Rendering structure:"
 msgstr "Struttura rendering:"
 
-#: package/contents/ui/config.qml:140
+#: package/contents/ui/config.qml:139
 msgid "Original"
 msgstr "Originale"
 
-#: package/contents/ui/config.qml:140
+#: package/contents/ui/config.qml:139
 msgid "Altered"
 msgstr "Alterata"
 
-#: package/contents/ui/config.qml:146
+#: package/contents/ui/config.qml:145
 msgid "Interaction X/Y signs:"
 msgstr "Segni interazione X/Y:"
 
-#: package/contents/ui/config.qml:156
+#: package/contents/ui/config.qml:155
 msgid "Spline calculation:"
 msgstr "Calcolo spline:"
 
-#: package/contents/ui/config.qml:157
+#: package/contents/ui/config.qml:156
 msgid "CPU"
 msgstr "CPU"
 
-#: package/contents/ui/config.qml:157
+#: package/contents/ui/config.qml:156
 msgid "GPU (automatic CPU fallback)"
 msgstr "GPU (fallback CPU automatico)"
 
-#: package/contents/ui/config.qml:166
+#: package/contents/ui/config.qml:165
 msgid "Mesh quality:"
 msgstr "Qualità mesh:"
 
-#: package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:166
 msgid "Soft (96)"
 msgstr "Soffice (96)"
 
-#: package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:166
 msgid "Crisp (140)"
 msgstr "Croccante (140)"
 
-#: package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:166
 msgid "Velvet (180)"
 msgstr "Velluto (180)"
 
-#: package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:166
 msgid "PS3 nostalgia (220)"
 msgstr "Nostalgia PS3 (220)"
 
-#: package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:166
 msgid "Creamy (320)"
 msgstr "Cremoso (320)"
 
-#: package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:166
 msgid "Definitely too much (440 × 320)"
 msgstr "Definitivamente troppo (440 × 320)"
 
-#: package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:166
 msgid "The GPU is crying (560 × 384)"
 msgstr "Il GPU piange (560 × 384)"
 
-#: package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:166
 msgid "Cosmically irresponsible (720 × 480)"
 msgstr "Cosmicamente irresponsabile (720 × 480)"
 
-#: package/contents/ui/config.qml:176
+#: package/contents/ui/config.qml:175
 msgid "Target FPS:"
 msgstr "FPS target:"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:186
 msgid "Particles:"
 msgstr "Particelle:"
 
-#: package/contents/ui/config.qml:198
+#: package/contents/ui/config.qml:197
 msgid "Wave speed:"
 msgstr "Velocità onda:"
 
-#: package/contents/ui/config.qml:213
+#: package/contents/ui/config.qml:212
 msgid "Particle speed:"
 msgstr "Velocità particelle:"
 
-#: package/contents/ui/config.qml:228
+#: package/contents/ui/config.qml:227
 msgid "Mouse strength:"
 msgstr "Forza mouse:"
 
-#: package/contents/ui/config.qml:243
+#: package/contents/ui/config.qml:242
 msgid "Interaction radius:"
 msgstr "Raggio interazione:"
 
-#: package/contents/ui/config.qml:257
+#: package/contents/ui/config.qml:256
 msgid "Brightness:"
 msgstr "Luminosità:"
 
-#: package/contents/ui/config.qml:272
+#: package/contents/ui/config.qml:271
 msgid "Base zoom:"
 msgstr "Zoom base:"
 
-#: package/contents/ui/config.qml:287
+#: package/contents/ui/config.qml:286
 msgid "Wheel sensitivity:"
 msgstr "Sensibilità rotella:"
 
-#: package/contents/ui/config.qml:302
+#: package/contents/ui/config.qml:301
 msgid "Flow group separation:"
 msgstr "Distanza macroclassi:"
 
-#: package/contents/ui/config.qml:313
+#: package/contents/ui/config.qml:312
 msgid "Internal flow separation:"
 msgstr "Distanza flussi interni:"
 
-#: package/contents/ui/config.qml:324
+#: package/contents/ui/config.qml:323
 msgid "Upper flows:"
 msgstr "Flussi superiori:"
 
-#: package/contents/ui/config.qml:335
+#: package/contents/ui/config.qml:334
 msgid "Center flows:"
 msgstr "Flussi centrali:"
 
-#: package/contents/ui/config.qml:346
+#: package/contents/ui/config.qml:345
 msgid "Lower flows:"
 msgstr "Flussi inferiori:"
 
-#: package/contents/ui/config.qml:357
+#: package/contents/ui/config.qml:356
 msgid "Multiscreen:"
 msgstr "Multischermo:"
 
-#: package/contents/ui/config.qml:358
+#: package/contents/ui/config.qml:357
 msgid "Use one virtual surface across all monitors"
 msgstr "Usa un'unica superficie virtuale su tutti i monitor"
 
-#: package/contents/ui/config.qml:367
+#: package/contents/ui/config.qml:366
 msgid "Horizontal overscan:"
 msgstr "Estensione orizzontale:"
 
-#: package/contents/ui/config.qml:368
+#: package/contents/ui/config.qml:367
 msgid "Extend waves and particles beyond the desktop edges"
 msgstr "Estendi onde e particelle oltre i bordi del desktop"
 
-#: package/contents/ui/config.qml:377
+#: package/contents/ui/config.qml:376
 msgid "Interaction:"
 msgstr "Interazione:"
 
-#: package/contents/ui/config.qml:378
+#: package/contents/ui/config.qml:377
 msgid ""
 "Mouse hover + click + wheel zoom; Shift+wheel moves the view without "
 "changing zoom"
@@ -217,33 +217,29 @@ msgstr ""
 "Mouse hover + click + rotella zoom; Shift+rotella sposta la vista senza "
 "cambiare zoom"
 
-#: package/contents/ui/config.qml:387
+#: package/contents/ui/config.qml:386
 msgid "Energy saving:"
 msgstr "Risparmio energetico:"
 
-#: package/contents/ui/config.qml:388
-msgid "Enable automatic pausing when the wallpaper is hidden or covered"
-msgstr "Abilita la pausa automatica quando lo sfondo è nascosto o coperto"
+#: package/contents/ui/config.qml:387
+msgid ""
+"Pause automatically when the wallpaper is hidden or an output is fully "
+"covered"
+msgstr ""
+"Metti automaticamente in pausa lo sfondo quando è nascosto o un output è "
+"completamente coperto"
 
-#: package/contents/ui/config.qml:396
-msgid "Covered outputs:"
-msgstr "Schermi coperti:"
-
-#: package/contents/ui/config.qml:397
-msgid "Pause outputs fully covered by applications"
-msgstr "Metti in pausa gli output completamente coperti dalle applicazioni"
-
-#: package/contents/ui/config.qml:406
+#: package/contents/ui/config.qml:395
 msgid "Rendering:"
 msgstr "Rendering:"
 
-#: package/contents/ui/config.qml:407
+#: package/contents/ui/config.qml:396
 msgid "Completely pause the wallpaper and GPU rendering (disable to resume)"
 msgstr ""
 "Blocca completamente il wallpaper e il rendering GPU (disattiva per "
 "riprendere)"
 
-#: package/contents/ui/config.qml:420
+#: package/contents/ui/config.qml:409
 msgid ""
 "The Ultra preset uses the v24 220×220 mesh with 32-bit indices. Left-click "
 "gradually attenuates the deformation; after release, the effect returns "
@@ -259,6 +255,15 @@ msgstr ""
 "centrali e inferiori sono indipendenti; con Multischermo attivo onda, "
 "prospettiva, zoom e particelle appartengono a un solo spazio globale, "
 "ritagliato per ciascun monitor."
+
+#~ msgid "Enable automatic pausing when the wallpaper is hidden or covered"
+#~ msgstr "Abilita la pausa automatica quando lo sfondo è nascosto o coperto"
+
+#~ msgid "Covered outputs:"
+#~ msgstr "Schermi coperti:"
+
+#~ msgid "Pause outputs fully covered by applications"
+#~ msgstr "Metti in pausa gli output completamente coperti dalle applicazioni"
 
 #~ msgid "Diagnostics:"
 #~ msgstr "Diagnostica:"

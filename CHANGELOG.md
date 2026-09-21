@@ -13,6 +13,8 @@ Semantic Versioning.
 - Runtime-derived multiscreen diagnostics without DP-1/DP-2 topology assumptions.
 - Removed the layout-sensitive Diagnostics checkbox from the normal wallpaper settings page.
 - Made Energy saving the master switch for automatic hidden/covered-output pausing.
+- Unified hidden and covered-output pausing into one Energy saving setting.
+- Removed zoom-derived overscan-off scissoring so disabled overscan still fills each output and clips only at the framebuffer boundary.
 - Rebuilt the Italian catalog during installation and removed absolute local paths from the translation template.
 
 ## [1.1.0] - 2026-09-20
