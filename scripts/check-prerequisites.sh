@@ -30,6 +30,10 @@ check_command plasmashell
 check_command kwriteconfig6
 check_command qdbus6
 
+printf '\nTranslation tools:\n'
+check_command msgfmt
+check_command xgettext
+
 printf '\nOptional diagnostics:\n'
 for command_name in kscreen-doctor systemctl journalctl; do
     if command -v "$command_name" >/dev/null 2>&1; then
