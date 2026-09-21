@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-interactive-flow-wallpaper 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 16:21+0200\n"
+"POT-Creation-Date: 2026-09-21 16:58+0200\n"
 "PO-Revision-Date: 2026-09-21 16:30+0200\n"
 "Last-Translator: XMB Flow project\n"
 "Language-Team: Italian\n"
@@ -11,213 +11,205 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:95
+#: package/contents/ui/config.qml:95
 msgid "XMB Interactive Flow"
 msgstr "Flusso interattivo XMB"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:105
+#: package/contents/ui/config.qml:105
 #, javascript-format
 msgid "CPU: %1%"
 msgstr "CPU: %1%"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:109
+#: package/contents/ui/config.qml:109
 #, javascript-format
 msgid "GPU: %1%"
 msgstr "GPU: %1%"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:118
+#: package/contents/ui/config.qml:118
 msgid "Pointer following:"
 msgstr "Segui puntatore:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:119
+#: package/contents/ui/config.qml:119
 msgid "Disabled"
 msgstr "Disattivato"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:119
+#: package/contents/ui/config.qml:119
 msgid "Interaction only"
 msgstr "Solo interazione"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:119
+#: package/contents/ui/config.qml:119
 msgid "Global flow + interaction"
 msgstr "Flusso globale + interazione"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:127
+#: package/contents/ui/config.qml:127
 msgid "Particle profile:"
 msgstr "Profilo particellare:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:128
+#: package/contents/ui/config.qml:128
 msgid "Small"
 msgstr "Piccole"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:128
+#: package/contents/ui/config.qml:128
 msgid "Large"
 msgstr "Grandi"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:128
+#: package/contents/ui/config.qml:128
 msgid "Mixed"
 msgstr "Miste"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:133
 msgid "Particle simulation:"
 msgstr "Simulazione particellare:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:134
+#: package/contents/ui/config.qml:134
 msgid "Pseudo-2D"
 msgstr "Pseudo-2D"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:134
+#: package/contents/ui/config.qml:134
 msgid "Volumetric 3D"
 msgstr "3D volumetrico"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:139
+#: package/contents/ui/config.qml:139
 msgid "Rendering structure:"
 msgstr "Struttura rendering:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:140
+#: package/contents/ui/config.qml:140
 msgid "Original"
 msgstr "Originale"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:140
+#: package/contents/ui/config.qml:140
 msgid "Altered"
 msgstr "Alterata"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:146
+#: package/contents/ui/config.qml:146
 msgid "Interaction X/Y signs:"
 msgstr "Segni interazione X/Y:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:156
+#: package/contents/ui/config.qml:156
 msgid "Spline calculation:"
 msgstr "Calcolo spline:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:157
+#: package/contents/ui/config.qml:157
 msgid "CPU"
 msgstr "CPU"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:157
+#: package/contents/ui/config.qml:157
 msgid "GPU (automatic CPU fallback)"
 msgstr "GPU (fallback CPU automatico)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:166
+#: package/contents/ui/config.qml:166
 msgid "Mesh quality:"
 msgstr "Qualità mesh:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:167
 msgid "Soft (96)"
 msgstr "Soffice (96)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:167
 msgid "Crisp (140)"
 msgstr "Croccante (140)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:167
 msgid "Velvet (180)"
 msgstr "Velluto (180)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:167
 msgid "PS3 nostalgia (220)"
 msgstr "Nostalgia PS3 (220)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:167
 msgid "Creamy (320)"
 msgstr "Cremoso (320)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:167
 msgid "Definitely too much (440 × 320)"
 msgstr "Definitivamente troppo (440 × 320)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:167
 msgid "The GPU is crying (560 × 384)"
 msgstr "Il GPU piange (560 × 384)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:167
+#: package/contents/ui/config.qml:167
 msgid "Cosmically irresponsible (720 × 480)"
 msgstr "Cosmicamente irresponsabile (720 × 480)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:176
+#: package/contents/ui/config.qml:176
 msgid "Target FPS:"
 msgstr "FPS target:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:187
 msgid "Particles:"
 msgstr "Particelle:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:198
+#: package/contents/ui/config.qml:198
 msgid "Wave speed:"
 msgstr "Velocità onda:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:213
+#: package/contents/ui/config.qml:213
 msgid "Particle speed:"
 msgstr "Velocità particelle:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:228
+#: package/contents/ui/config.qml:228
 msgid "Mouse strength:"
 msgstr "Forza mouse:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:243
+#: package/contents/ui/config.qml:243
 msgid "Interaction radius:"
 msgstr "Raggio interazione:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:257
+#: package/contents/ui/config.qml:257
 msgid "Brightness:"
 msgstr "Luminosità:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:272
+#: package/contents/ui/config.qml:272
 msgid "Base zoom:"
 msgstr "Zoom base:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:287
+#: package/contents/ui/config.qml:287
 msgid "Wheel sensitivity:"
 msgstr "Sensibilità rotella:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:302
+#: package/contents/ui/config.qml:302
 msgid "Flow group separation:"
 msgstr "Distanza macroclassi:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:313
+#: package/contents/ui/config.qml:313
 msgid "Internal flow separation:"
 msgstr "Distanza flussi interni:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:324
+#: package/contents/ui/config.qml:324
 msgid "Upper flows:"
 msgstr "Flussi superiori:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:335
+#: package/contents/ui/config.qml:335
 msgid "Center flows:"
 msgstr "Flussi centrali:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:346
+#: package/contents/ui/config.qml:346
 msgid "Lower flows:"
 msgstr "Flussi inferiori:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:357
+#: package/contents/ui/config.qml:357
 msgid "Multiscreen:"
 msgstr "Multischermo:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:358
+#: package/contents/ui/config.qml:358
 msgid "Use one virtual surface across all monitors"
 msgstr "Usa un'unica superficie virtuale su tutti i monitor"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:367
+#: package/contents/ui/config.qml:367
 msgid "Horizontal overscan:"
 msgstr "Estensione orizzontale:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:368
+#: package/contents/ui/config.qml:368
 msgid "Extend waves and particles beyond the desktop edges"
 msgstr "Estendi onde e particelle oltre i bordi del desktop"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:377
-msgid "Diagnostics:"
-msgstr "Diagnostica:"
-
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:378
-msgid "Show the global 2D grid and isolate multiscreen geometry"
-msgstr "Mostra la griglia globale 2D e isola il multischermo"
-
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:388
+#: package/contents/ui/config.qml:377
 msgid "Interaction:"
 msgstr "Interazione:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:389
+#: package/contents/ui/config.qml:378
 msgid ""
 "Mouse hover + click + wheel zoom; Shift+wheel moves the view without "
 "changing zoom"
@@ -225,33 +217,33 @@ msgstr ""
 "Mouse hover + click + rotella zoom; Shift+rotella sposta la vista senza "
 "cambiare zoom"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:398
+#: package/contents/ui/config.qml:387
 msgid "Energy saving:"
 msgstr "Risparmio energetico:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:399
-msgid "Pause when the wallpaper is not visible"
-msgstr "Pausa quando il wallpaper non è visibile"
+#: package/contents/ui/config.qml:388
+msgid "Enable automatic pausing when the wallpaper is hidden or covered"
+msgstr "Abilita la pausa automatica quando lo sfondo è nascosto o coperto"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:407
+#: package/contents/ui/config.qml:396
 msgid "Covered outputs:"
 msgstr "Schermi coperti:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:408
-msgid "Automatically pause and resume each monitor"
-msgstr "Pausa e riprendi automaticamente ogni monitor"
+#: package/contents/ui/config.qml:397
+msgid "Pause outputs fully covered by applications"
+msgstr "Metti in pausa gli output completamente coperti dalle applicazioni"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:416
+#: package/contents/ui/config.qml:406
 msgid "Rendering:"
 msgstr "Rendering:"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:417
+#: package/contents/ui/config.qml:407
 msgid "Completely pause the wallpaper and GPU rendering (disable to resume)"
 msgstr ""
 "Blocca completamente il wallpaper e il rendering GPU (disattiva per "
 "riprendere)"
 
-#: /home/lele/Scrivania/sfondo/xmb-native-plasma-v1.1.0/package/contents/ui/config.qml:430
+#: package/contents/ui/config.qml:420
 msgid ""
 "The Ultra preset uses the v24 220×220 mesh with 32-bit indices. Left-click "
 "gradually attenuates the deformation; after release, the effect returns "
@@ -267,3 +259,15 @@ msgstr ""
 "centrali e inferiori sono indipendenti; con Multischermo attivo onda, "
 "prospettiva, zoom e particelle appartengono a un solo spazio globale, "
 "ritagliato per ciascun monitor."
+
+#~ msgid "Diagnostics:"
+#~ msgstr "Diagnostica:"
+
+#~ msgid "Show the global 2D grid and isolate multiscreen geometry"
+#~ msgstr "Mostra la griglia globale 2D e isola il multischermo"
+
+#~ msgid "Pause when the wallpaper is not visible"
+#~ msgstr "Pausa quando il wallpaper non è visibile"
+
+#~ msgid "Automatically pause and resume each monitor"
+#~ msgstr "Pausa e riprendi automaticamente ogni monitor"

@@ -33,4 +33,13 @@ assert.ok(existsSync(new URL("package/contents/locale/it/LC_MESSAGES/plasma_wall
 assert.doesNotMatch(config, /Segui puntatore:|Multischermo:|Qualità mesh:/,
     "Italian UI literals must stay in the catalog instead of the QML source");
 
-console.log("Configuration contract, pause binding and localization markers are present");
+assert.match(main, /pauseWhenCovered:\s*Boolean\(root\.cfg\.pauseWhenHidden\s*\?\?\s*true\)\s*&&\s*Boolean\(root\.cfg\.pauseWhenCovered\s*\?\?\s*true\)/,
+    "energy saving must be the master switch for automatic covered-output pausing");
+assert.doesNotMatch(config, /i18n\(\"Diagnostics:\"\)/,
+    "the diagnostics-only control must not destabilize the normal settings layout");
+assert.match(config, /Horizontal overscan:/,
+    "horizontal overscan must remain available in the settings page");
+assert.match(config, /checked:\s*root\.cfg_horizontalOverscan/,
+    "horizontal overscan must be bound to its saved configuration value");
+
+console.log("Configuration contract, pause binding, localization and settings controls are present");

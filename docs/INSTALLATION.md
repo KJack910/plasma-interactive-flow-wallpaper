@@ -12,6 +12,7 @@ Supported environment:
 - Qt 6.4+ with Core, Gui, Quick, Qml, OpenGL and DBus for building;
 - Qt 6.6+ is the verified runtime baseline;
 - `kpackagetool6`, `kwriteconfig6`, `qdbus6` and `plasmashell`;
+- GNU gettext tools (`msgfmt` and `xgettext`) for the Italian catalog;
 - OpenGL 3.3+ for the renderer.
 
 Automatic per-output pause also requires the KWin script integration. The
@@ -29,6 +30,7 @@ Without dependency installation:
 
 ```bash
 ./scripts/build.sh
+./package/translate/build.sh
 ```
 
 ## Manual build
@@ -36,6 +38,7 @@ Without dependency installation:
 ```bash
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build --parallel 1
+./package/translate/build.sh
 ```
 
 The native plugin is generated at:
@@ -102,6 +105,7 @@ Install the following equivalents manually:
 - CMake and Ninja;
 - a C++20 compiler;
 - Qt 6 Core, Gui, Quick, Qml, OpenGL and DBus;
+- GNU gettext (`msgfmt` and `xgettext`);
 - KDE Plasma 6 tools for KPackage, KWin and plasmashell.
 
 After manual dependency installation, use the build and test commands above.

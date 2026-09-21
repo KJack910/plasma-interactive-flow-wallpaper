@@ -11,6 +11,9 @@ Semantic Versioning.
 - Complete configuration-property forwarding from Plasma QML to the native renderer.
 - Headless-safe render-pause behavior and registered KWin/Node/Python integration tests.
 - Runtime-derived multiscreen diagnostics without DP-1/DP-2 topology assumptions.
+- Removed the layout-sensitive Diagnostics checkbox from the normal wallpaper settings page.
+- Made Energy saving the master switch for automatic hidden/covered-output pausing.
+- Rebuilt the Italian catalog during installation and removed absolute local paths from the translation template.
 
 ## [1.1.0] - 2026-09-20
 

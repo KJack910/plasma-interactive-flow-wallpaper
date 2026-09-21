@@ -14,15 +14,18 @@ command -v msgmerge >/dev/null 2>&1 || {
     exit 1
 }
 
-xgettext \
-    --language=JavaScript \
-    --from-code=UTF-8 \
-    --keyword=i18n:1 \
-    --keyword=i18np:1,2 \
-    --package-name="plasma-interactive-flow-wallpaper" \
-    --package-version="1.1.0" \
-    --output="$TEMPLATE" \
-    "$ROOT/package/contents/ui/config.qml"
+(
+    cd "$ROOT"
+    xgettext \
+        --language=JavaScript \
+        --from-code=UTF-8 \
+        --keyword=i18n:1 \
+        --keyword=i18np:1,2 \
+        --package-name="plasma-interactive-flow-wallpaper" \
+        --package-version="1.1.0" \
+        --output="package/translate/template.pot" \
+        "package/contents/ui/config.qml"
+)
 
 msgmerge --update --no-fuzzy-matching "$CATALOG" "$TEMPLATE"
 printf 'Updated %s from %s\n' "$CATALOG" "$TEMPLATE"

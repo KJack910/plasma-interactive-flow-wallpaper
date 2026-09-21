@@ -38,11 +38,12 @@ python3 tests/test-kscreen-topology.py
 6. Check pointer hover, press and release behavior.
 7. Check wheel zoom, minimum/maximum limits and sensitivity.
 8. Check mesh and particle presets.
-9. On multiple monitors, enable the `Multiscreen` and `Diagnostics` options.
+9. On multiple monitors, enable the `Multiscreen` option and inspect the runtime topology with `scripts/multiscreen-diagnose.sh`.
 10. Run `scripts/multiscreen-diagnose.sh` and verify that it reports the actual output names, rectangles and virtual bounds.
 11. Confirm grid continuity at monitor seams, including unequal and vertically offset outputs.
-12. Cover one monitor completely with a window and verify its pause.
-13. Run `scripts/diagnose.sh` and inspect the `plasmashell` log.
+12. Toggle `Energy saving` off; verify that a fully covered output keeps rendering, then enable it and verify the covered-output pause resumes.
+13. Toggle `Horizontal overscan` off and verify complete rendering at each output edge; enable it and verify waves/particles can continue past the horizontal desktop bounds.
+14. Run `scripts/diagnose.sh` and inspect the `plasmashell` log.
 
 ## Acceptance criteria
 

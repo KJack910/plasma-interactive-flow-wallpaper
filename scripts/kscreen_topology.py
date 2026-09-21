@@ -76,7 +76,7 @@ def main() -> int:
     print(f"Virtual bounds: x={left}, y={top}, size={width}x{height}")
     print(f"Output count: {len(outputs)}")
     print("Reference geometry: runtime-derived from the active Plasma outputs")
-    print("Enable the Multiscreen and Diagnostics settings to inspect global seams.")
+    print("Enable the Multiscreen setting and inspect the runtime topology with the diagnostic script.")
     print("The diagnostic grid must remain continuous across every output boundary.")
     return 0
 

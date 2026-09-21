@@ -374,17 +374,6 @@ Item {
             }
 
             CheckBox {
-                Kirigami.FormData.label: i18n("Diagnostics:")
-                text: i18n("Show the global 2D grid and isolate multiscreen geometry")
-                checked: root.cfg_multiscreenDebug
-                enabled: root.cfg_linkAcrossScreens
-                onToggled: {
-                    root.cfg_multiscreenDebug = checked
-                    root.configurationChanged()
-                }
-            }
-
-            CheckBox {
                 Kirigami.FormData.label: i18n("Interaction:")
                 text: i18n("Mouse hover + click + wheel zoom; Shift+wheel moves the view without changing zoom")
                 checked: root.cfg_interactionEnabled
@@ -396,7 +385,7 @@ Item {
 
             CheckBox {
                 Kirigami.FormData.label: i18n("Energy saving:")
-                text: i18n("Pause when the wallpaper is not visible")
+                text: i18n("Enable automatic pausing when the wallpaper is hidden or covered")
                 checked: root.cfg_pauseWhenHidden
                 onToggled: {
                     root.cfg_pauseWhenHidden = checked
@@ -405,8 +394,9 @@ Item {
             }
             CheckBox {
                 Kirigami.FormData.label: i18n("Covered outputs:")
-                text: i18n("Automatically pause and resume each monitor")
+                text: i18n("Pause outputs fully covered by applications")
                 checked: root.cfg_pauseWhenCovered
+                enabled: root.cfg_pauseWhenHidden
                 onToggled: {
                     root.cfg_pauseWhenCovered = checked
                     root.configurationChanged()

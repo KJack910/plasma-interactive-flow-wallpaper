@@ -7,19 +7,20 @@ KWIN_SCRIPT_ID="xmbfullscreenbridge"
 if [[ "${1:-}" == "--deps" ]]; then
   sudo pacman -S --needed \
     base-devel cmake ninja qt6-base qt6-declarative \
-    qt6-tools extra-cmake-modules libplasma kf6-kpackage
+    qt6-tools extra-cmake-modules libplasma kf6-kpackage gettext
 fi
 
-for cmd in cmake ninja kpackagetool6; do
+for cmd in cmake ninja kpackagetool6 msgfmt; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
     echo "Errore: comando '$cmd' non trovato." >&2
-    echo "Installa manualmente CMake, Ninja, Qt 6 e gli strumenti KDE Plasma 6;" >&2
+    echo "Installa manualmente CMake, Ninja, Qt 6, gettext e gli strumenti KDE Plasma 6;" >&2
     echo "su Arch/CachyOS puoi eseguire: $0 --deps" >&2
     exit 1
   fi
 done
 
 "$ROOT/scripts/build.sh"
+"$ROOT/package/translate/build.sh"
 
 SO="$ROOT/package/contents/ui/xmbnative/libxmbnativeplugin.so"
 if [[ ! -f "$SO" ]]; then
