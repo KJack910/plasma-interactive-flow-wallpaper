@@ -25,6 +25,8 @@ package/contents/ui/xmbnative/*.so
 .vscode/
 .idea/
 *.user
+__pycache__/
+*.pyc
 compile_commands.json
 
 # Runtime/debug artifacts

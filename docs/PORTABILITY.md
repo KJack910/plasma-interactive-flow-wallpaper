@@ -1,6 +1,6 @@
 # Portability and generality audit
 
-Audit date: September 20, 2026.
+Audit date: September 21, 2026.
 
 ## Summary
 
@@ -39,9 +39,11 @@ The current development system verified:
 - `kpackagetool6`, `plasmashell`, `systemctl` and `qdbus6`;
 - successful CMake configuration;
 - successful Release build;
-- six passing CTest cases;
-- QML lint without errors;
-- Bash syntax for build, installation, removal and diagnostic scripts.
+- ten passing CTest cases, including configuration, pause, KWin and topology checks;
+- Italian translation catalog validation and `.mo` generation;
+- QML lint without syntax errors;
+- Bash syntax for build, installation, removal and diagnostic scripts;
+- runtime-derived output names, rectangles and virtual bounds from `kscreen-doctor`.
 
 This demonstrates reproducible behavior in the local Linux/KDE target. It does
 not prove a build on Debian, Fedora, Windows or macOS.

@@ -31,6 +31,8 @@ Windows/macOS wallpaper and it does not currently target Plasma 5.
 - CPU readings from Linux `/proc/stat`.
 - GPU readings from DRM sysfs, with direct metrics and engine-counter fallback.
 - CTest coverage for zoom, mesh, spline and output-visibility behavior.
+- English-source settings with a shipped Italian Plasma translation catalog.
+- Runtime-derived multiscreen geometry for arbitrary output names, sizes and offsets.
 - User-local installation and removal scripts.
 
 ## Requirements

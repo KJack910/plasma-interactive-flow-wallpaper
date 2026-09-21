@@ -92,7 +92,7 @@ Item {
         spacing: Kirigami.Units.largeSpacing
 
         Kirigami.Heading {
-            text: "XMB Interactive Flow"
+            text: i18n("XMB Interactive Flow")
             level: 2
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
@@ -102,11 +102,11 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             spacing: Kirigami.Units.largeSpacing
             Label {
-                text: "CPU: " + usage.cpuPercent.toFixed(1) + "%"
+                text: i18n("CPU: %1%", usage.cpuPercent.toFixed(1))
                 font.bold: true
             }
             Label {
-                text: "GPU: " + usage.gpuPercent.toFixed(1) + "%"
+                text: i18n("GPU: %1%", usage.gpuPercent.toFixed(1))
                 font.bold: true
             }
         }
@@ -115,8 +115,8 @@ Item {
             Layout.fillWidth: true
 
             ComboBox {
-                Kirigami.FormData.label: "Segui puntatore:"
-                model: ["Disattivato", "Solo interazione", "Flusso globale + interazione"]
+                Kirigami.FormData.label: i18n("Pointer following:")
+                model: [i18n("Disabled"), i18n("Interaction only"), i18n("Global flow + interaction")]
                 currentIndex: root.cfg_pointerFollowMode
                 onActivated: index => {
                     root.cfg_pointerFollowMode = index
@@ -124,26 +124,26 @@ Item {
                 }
             }
             ComboBox {
-                Kirigami.FormData.label: "Profilo particellari:"
-                model: ["Piccoli", "Grandi", "Misti"]
+                Kirigami.FormData.label: i18n("Particle profile:")
+                model: [i18n("Small"), i18n("Large"), i18n("Mixed")]
                 currentIndex: root.cfg_particleStyle
                 onActivated: { root.cfg_particleStyle = index; root.configurationChanged() }
             }
             ComboBox {
-                Kirigami.FormData.label: "Simulazione particellari:"
-                model: ["Pseudo-2D", "3D volumetrico"]
+                Kirigami.FormData.label: i18n("Particle simulation:")
+                model: [i18n("Pseudo-2D"), i18n("Volumetric 3D")]
                 currentIndex: root.cfg_particleSimulation
                 onActivated: { root.cfg_particleSimulation = index; root.configurationChanged() }
             }
             ComboBox {
-                Kirigami.FormData.label: "Struttura rendering:"
-                model: ["Originale", "Alterata"]
+                Kirigami.FormData.label: i18n("Rendering structure:")
+                model: [i18n("Original"), i18n("Altered")]
                 currentIndex: root.cfg_renderStyle
                 onActivated: { root.cfg_renderStyle = index; root.configurationChanged() }
             }
 
             ComboBox {
-                Kirigami.FormData.label: "Segni interazione X/Y:"
+                Kirigami.FormData.label: i18n("Interaction X/Y signs:")
                 model: ["+X / +Y", "−X / +Y", "+X / −Y", "−X / −Y"]
                 currentIndex: root.cfg_interactionDirection
                 onActivated: index => {
@@ -153,8 +153,8 @@ Item {
             }
 
             ComboBox {
-                Kirigami.FormData.label: "Calcolo spline:"
-                model: ["CPU", "GPU (fallback CPU automatico)"]
+                Kirigami.FormData.label: i18n("Spline calculation:")
+                model: [i18n("CPU"), i18n("GPU (automatic CPU fallback)")]
                 currentIndex: root.cfg_splineBackend
                 onActivated: index => {
                     root.cfg_splineBackend = index
@@ -163,8 +163,8 @@ Item {
             }
 
             ComboBox {
-                Kirigami.FormData.label: "Qualità mesh:"
-                model: ["Soffice (96)", "Croccante (140)", "Velluto (180)", "Nostalgia PS3 (220)", "Cremoso (320)", "Definitivamente Troppo (440 × 320)", "Il GPU Piange (560 × 384)", "Cosmicamente Irresponsabile (720 × 480)"]
+                Kirigami.FormData.label: i18n("Mesh quality:")
+                model: [i18n("Soft (96)"), i18n("Crisp (140)"), i18n("Velvet (180)"), i18n("PS3 nostalgia (220)"), i18n("Creamy (320)"), i18n("Definitely too much (440 × 320)"), i18n("The GPU is crying (560 × 384)"), i18n("Cosmically irresponsible (720 × 480)")]
                 currentIndex: root.cfg_quality
                 onActivated: index => {
                     root.cfg_quality = index
@@ -173,7 +173,7 @@ Item {
             }
 
             SpinBox {
-                Kirigami.FormData.label: "FPS target:"
+                Kirigami.FormData.label: i18n("Target FPS:")
                 from: 15; to: 240
                 value: root.cfg_targetFps
                 editable: true
@@ -184,7 +184,7 @@ Item {
             }
 
             SpinBox {
-                Kirigami.FormData.label: "Particelle:"
+                Kirigami.FormData.label: i18n("Particles:")
                 from: 100; to: 30000; stepSize: 100
                 value: root.cfg_particleCount
                 editable: true
@@ -195,7 +195,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Velocità onda:"
+                Kirigami.FormData.label: i18n("Wave speed:")
                 Slider {
                     id: waveSlider
                     Layout.preferredWidth: 260
@@ -210,7 +210,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Velocità particelle:"
+                Kirigami.FormData.label: i18n("Particle speed:")
                 Slider {
                     id: particleSpeedSlider
                     Layout.preferredWidth: 260
@@ -225,7 +225,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Forza mouse:"
+                Kirigami.FormData.label: i18n("Mouse strength:")
                 Slider {
                     id: mouseSlider
                     Layout.preferredWidth: 260
@@ -240,7 +240,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Raggio interazione:"
+                Kirigami.FormData.label: i18n("Interaction radius:")
                 Slider {
                     Layout.preferredWidth: 260
                     from: 0.40; to: 2.50; stepSize: 0.05
@@ -254,7 +254,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Luminosità:"
+                Kirigami.FormData.label: i18n("Brightness:")
                 Slider {
                     id: brightnessSlider
                     Layout.preferredWidth: 260
@@ -269,7 +269,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Zoom base:"
+                Kirigami.FormData.label: i18n("Base zoom:")
                 Slider {
                     id: zoomSlider
                     Layout.preferredWidth: 260
@@ -284,7 +284,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Sensibilità rotella:"
+                Kirigami.FormData.label: i18n("Wheel sensitivity:")
                 Slider {
                     id: zoomSensitivitySlider
                     Layout.preferredWidth: 260
@@ -299,7 +299,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Distanza macroclassi:"
+                Kirigami.FormData.label: i18n("Flow group separation:")
                 Slider {
                     Layout.preferredWidth: 260
                     from: 0.45; to: 1.60; stepSize: 0.05
@@ -310,7 +310,7 @@ Item {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Distanza flussi interni:"
+                Kirigami.FormData.label: i18n("Internal flow separation:")
                 Slider {
                     Layout.preferredWidth: 260
                     from: 0.10; to: 1.20; stepSize: 0.05
@@ -321,7 +321,7 @@ Item {
             }
 
             SpinBox {
-                Kirigami.FormData.label: "Flussi superiori:"
+                Kirigami.FormData.label: i18n("Upper flows:")
                 from: 0; to: 4
                 value: root.cfg_upperFlowCount
                 editable: true
@@ -332,7 +332,7 @@ Item {
             }
 
             SpinBox {
-                Kirigami.FormData.label: "Flussi centrali:"
+                Kirigami.FormData.label: i18n("Center flows:")
                 from: 0; to: 4
                 value: root.cfg_centerFlowCount
                 editable: true
@@ -343,7 +343,7 @@ Item {
             }
 
             SpinBox {
-                Kirigami.FormData.label: "Flussi inferiori:"
+                Kirigami.FormData.label: i18n("Lower flows:")
                 from: 0; to: 4
                 value: root.cfg_lowerFlowCount
                 editable: true
@@ -354,8 +354,8 @@ Item {
             }
 
             CheckBox {
-                Kirigami.FormData.label: "Multischermo:"
-                text: "Usa un'unica superficie virtuale su tutti i monitor"
+                Kirigami.FormData.label: i18n("Multiscreen:")
+                text: i18n("Use one virtual surface across all monitors")
                 checked: root.cfg_linkAcrossScreens
                 onToggled: {
                     root.cfg_linkAcrossScreens = checked
@@ -364,8 +364,8 @@ Item {
             }
 
             CheckBox {
-                Kirigami.FormData.label: "Estensione orizzontale:"
-                text: "Estendi onde e particelle oltre i bordi del desktop"
+                Kirigami.FormData.label: i18n("Horizontal overscan:")
+                text: i18n("Extend waves and particles beyond the desktop edges")
                 checked: root.cfg_horizontalOverscan
                 onToggled: {
                     root.cfg_horizontalOverscan = checked
@@ -374,8 +374,8 @@ Item {
             }
 
             CheckBox {
-                Kirigami.FormData.label: "Diagnostica:"
-                text: "Mostra la griglia globale 2D e isola il multischermo"
+                Kirigami.FormData.label: i18n("Diagnostics:")
+                text: i18n("Show the global 2D grid and isolate multiscreen geometry")
                 checked: root.cfg_multiscreenDebug
                 enabled: root.cfg_linkAcrossScreens
                 onToggled: {
@@ -385,8 +385,8 @@ Item {
             }
 
             CheckBox {
-                Kirigami.FormData.label: "Interazione:"
-                text: "Mouse hover + click + rotella zoom; Shift+rotella sposta la vista senza cambiare zoom"
+                Kirigami.FormData.label: i18n("Interaction:")
+                text: i18n("Mouse hover + click + wheel zoom; Shift+wheel moves the view without changing zoom")
                 checked: root.cfg_interactionEnabled
                 onToggled: {
                     root.cfg_interactionEnabled = checked
@@ -395,8 +395,8 @@ Item {
             }
 
             CheckBox {
-                Kirigami.FormData.label: "Risparmio energetico:"
-                text: "Pausa quando il wallpaper non è visibile"
+                Kirigami.FormData.label: i18n("Energy saving:")
+                text: i18n("Pause when the wallpaper is not visible")
                 checked: root.cfg_pauseWhenHidden
                 onToggled: {
                     root.cfg_pauseWhenHidden = checked
@@ -404,8 +404,8 @@ Item {
                 }
             }
             CheckBox {
-                Kirigami.FormData.label: "Schermi coperti:"
-                text: "Pausa e riprendi automaticamente ogni monitor"
+                Kirigami.FormData.label: i18n("Covered outputs:")
+                text: i18n("Automatically pause and resume each monitor")
                 checked: root.cfg_pauseWhenCovered
                 onToggled: {
                     root.cfg_pauseWhenCovered = checked
@@ -413,8 +413,8 @@ Item {
                 }
             }
             CheckBox {
-                Kirigami.FormData.label: "Rendering:"
-                text: "Blocca completamente il wallpaper e il rendering GPU (disattiva per riprendere)"
+                Kirigami.FormData.label: i18n("Rendering:")
+                text: i18n("Completely pause the wallpaper and GPU rendering (disable to resume)")
                 checked: root.cfg_renderingPaused
                 onToggled: {
                     root.cfg_renderingPaused = checked
@@ -427,11 +427,7 @@ Item {
             Layout.fillWidth: true
             wrapMode: Text.WordWrap
             opacity: 0.7
-            text: "Il preset Ultra usa la mesh 220×220 della v24 con indici a 32 bit. " +
-                  "Il click sinistro attenua gradualmente la deformazione; al rilascio l'effetto ritorna progressivamente. " +
-                  "Le particelle ora seguono i flussi attivi. La rotella esegue uno zoom fluido attorno al puntatore fino a 3.50×. " +
-                  "I flussi superiori, centrali e inferiori sono indipendenti; con Multischermo attivo onda, prospettiva, " +
-                  "zoom e particelle appartengono a un solo spazio globale, ritagliato per ciascun monitor."
+            text: i18n("The Ultra preset uses the v24 220×220 mesh with 32-bit indices. Left-click gradually attenuates the deformation; after release, the effect returns progressively. Particles follow the active flows. The wheel performs smooth zoom around the pointer up to 3.50×. Upper, center and lower flows are independent; with Multiscreen enabled, waves, perspective, zoom and particles belong to one global space cropped for each monitor.")
         }
     }
     }

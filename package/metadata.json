@@ -3,7 +3,9 @@
   "KPlugin": {
     "Id": "org.xmbflow.interactive",
     "Name": "XMB Interactive Flow",
+    "Name[it]": "Flusso interattivo XMB",
     "Description": "Native interactive PS3 XMB-inspired wave and particle wallpaper for Plasma 6.",
+    "Description[it]": "Wallpaper nativo interattivo per Plasma 6, ispirato alle onde e alle particelle dell'XMB di PS3.",
     "Icon": "preferences-desktop-wallpaper",
     "Version": "1.1.0",
     "License": "MIT",

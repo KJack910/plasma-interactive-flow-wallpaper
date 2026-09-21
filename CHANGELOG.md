@@ -7,6 +7,10 @@ Semantic Versioning.
 ## [Unreleased]
 
 - Reserved for changes after 1.1.0.
+- Localized settings with English source strings and an Italian catalog.
+- Complete configuration-property forwarding from Plasma QML to the native renderer.
+- Headless-safe render-pause behavior and registered KWin/Node/Python integration tests.
+- Runtime-derived multiscreen diagnostics without DP-1/DP-2 topology assumptions.
 
 ## [1.1.0] - 2026-09-20
 

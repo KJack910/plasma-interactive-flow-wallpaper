@@ -12,9 +12,12 @@
 *.yml text eol=lf
 *.yaml text eol=lf
 *.sh text eol=lf
+*.po text eol=lf
+*.pot text eol=lf
 *.xml text eol=lf
 
 *.png binary
+*.gif binary
 *.jpg binary
 *.jpeg binary
 *.webp binary

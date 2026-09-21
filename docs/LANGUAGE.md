@@ -10,8 +10,25 @@ English is the canonical language for the repository and GitHub collaboration:
 - commit messages and tags;
 - CI output and contribution instructions.
 
-User-facing Plasma strings should remain clear and translatable. When Qt/KDE
-translation catalogs are introduced, English remains the source language.
+User-facing Plasma strings use English as the source language and are localized
+through KDE's `i18n()` helper. The wallpaper currently ships an Italian catalog
+under `package/contents/locale/it/LC_MESSAGES/`; English is the fallback when no
+translation is available.
+
+The settings page follows the active Plasma/system locale. It does not add a
+second per-wallpaper language selector, so locale changes should be followed by
+reloading the wallpaper configuration page or restarting `plasmashell`.
+
+Translation sources and build files live in:
+
+```text
+package/translate/it.po
+package/translate/build.sh
+package/contents/locale/it/LC_MESSAGES/plasma_wallpaper_org.xmbflow.interactive.mo
+```
+
+Run `package/translate/build.sh` after changing the catalog. Keep message IDs in
+English and preserve `%1` placeholders exactly.
 
 ## Localized documentation
 

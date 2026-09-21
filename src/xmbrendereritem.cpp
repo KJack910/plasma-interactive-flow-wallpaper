@@ -1294,7 +1294,7 @@ private:
     qreal m_pointerStrength = 0.0;
     qreal m_interactionRadius = 1.0;
     QVector2D m_interactionCenter = QVector2D(0.f, 0.f);
-    QSizeF m_viewportLogical = QSizeF(1920, 1080);
+    QSizeF m_viewportLogical = QSizeF(1.0, 1.0);
     qreal m_brightness = 1.0;
     qreal m_zoom = 1.0;
     QVector2D m_zoomOffsetPx;
@@ -1436,9 +1436,10 @@ void XmbRendererItem::updateDesktopGeometry()
     m_viewportSizePx = QSizeF(currentRect.size());
     m_virtualSizePx = QSizeF(virtualRect.size());
 
-    // Preserve the original spatial frequency in pixels instead of stretching
-    // one wave to fill the combined desktop. The left-most horizontal output
-    // is the phase reference. On the user's setup this is DP-1 = 1920 px.
+    // Preserve the spatial frequency in pixels instead of stretching one wave
+    // to fill the combined desktop. The phase reference is selected entirely
+    // from the active QScreen topology; connector names and development
+    // resolutions are never used.
     QScreen *reference = current;
     for (QScreen *screen : siblings)
     {

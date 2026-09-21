@@ -34,6 +34,8 @@ target_link_libraries(xmbnativeplugin PRIVATE
 target_include_directories(xmbnativeplugin PRIVATE "${CMAKE_SOURCE_DIR}/src")
 
 enable_testing()
+find_program(NODE_EXECUTABLE node)
+find_package(Python3 COMPONENTS Interpreter QUIET)
 add_executable(xmb_zoomboundaries_test tests/zoom-boundaries.cpp)
 target_link_libraries(xmb_zoomboundaries_test PRIVATE Qt6::Core)
 target_include_directories(xmb_zoomboundaries_test PRIVATE "${CMAKE_SOURCE_DIR}/src")
@@ -72,6 +74,20 @@ add_executable(xmb_outputvisibility_test
 target_link_libraries(xmb_outputvisibility_test PRIVATE Qt6::Core)
 target_include_directories(xmb_outputvisibility_test PRIVATE "${CMAKE_SOURCE_DIR}/src")
 add_test(NAME xmb_outputvisibility COMMAND xmb_outputvisibility_test)
+
+if(NODE_EXECUTABLE)
+    add_test(NAME xmb_config_contract
+        COMMAND "${NODE_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/config-contract.mjs")
+    add_test(NAME xmb_power_save_kwin
+        COMMAND "${NODE_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/power-save-kwin.mjs")
+    add_test(NAME xmb_render_pause
+        COMMAND "${NODE_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/render-pause.mjs")
+endif()
+
+if(Python3_Interpreter_FOUND)
+    add_test(NAME xmb_kscreen_topology
+        COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/test-kscreen-topology.py")
+endif()
 
 foreach(test_target IN ITEMS xmb_zoomboundaries_test xmb_meshvisibility_test xmb_outputvisibility_test)
     if(MSVC)
